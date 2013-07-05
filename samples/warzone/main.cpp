@@ -1,6 +1,7 @@
 #include "Crown.h"
 #include "RenderWorld.h"
 #include "Environment.h"
+#include "Agent.h"
 
 using namespace crown;
 
@@ -22,6 +23,8 @@ void frame(float dt)
 	}
 
 	rw.frame();
+	m.update();
+	Log::i("FPS: %f", 1.0f/device()->last_delta_time());
 }
 
 //-----------------------------------------------------------------------------

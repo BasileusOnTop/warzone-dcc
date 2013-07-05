@@ -35,7 +35,7 @@ public: // Constructor
 	
 public: // Methods
 	
-	int update();
+	virtual int update();
 	int damage(uint32_t damage);
 
 private:
