@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #include "Crown.h"
 
 using namespace crown;

@@ -353,7 +353,6 @@ if (LINUX)
 	)
 
 	set (CROWN_EXECUTABLE_NAME crown-linux)
-	set (CROWN_MAIN_SRC os/linux/main.cpp)
 endif (LINUX)
 
 if (WINDOWS)
@@ -396,7 +395,6 @@ if (WINDOWS)
 	set (COMPILER_FLAGS /link /OPT:NOREF)
 	
 	set (CROWN_EXECUTABLE_NAME crown-win)
-	set (CROWN_MAIN_SRC os/win/main.cpp)
 endif(WINDOWS)
 
 set (CROWN_SOURCES
