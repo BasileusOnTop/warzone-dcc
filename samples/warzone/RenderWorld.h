@@ -3,11 +3,13 @@
 #include "Mat4.h"
 using namespace crown;
 
+class Environment;
+
 class RenderWorld
 {
 public:
 
-	RenderWorld();
+	RenderWorld(Environment* env);
 
 	void	init();
 	void	frame();
@@ -15,5 +17,6 @@ public:
 
 private:
 
-	Mat4	m_projection;
+	Environment*	m_env;
+	Mat4			m_projection;
 };

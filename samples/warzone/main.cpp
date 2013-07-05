@@ -1,9 +1,11 @@
 #include "Crown.h"
 #include "RenderWorld.h"
+#include "Environment.h"
 
 using namespace crown;
 
-RenderWorld rw;
+Environment m;
+RenderWorld rw(&m);
 
 //-----------------------------------------------------------------------------
 void init()
