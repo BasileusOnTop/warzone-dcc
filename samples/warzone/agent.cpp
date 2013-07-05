@@ -3,12 +3,11 @@
 #include <stdio.h>
 
 
-	Agent::Agent()
-	{
-	}
-
 	Agent::Agent(uint32_t health, uint32_t damage, float positionX, float positionY, float radius, Factions team, Environment* env) 
 	{
+		m_killed = false;
+		reset_scan();
+
 		m_health = health;
 		m_damage = damage;
 		m_positionX = positionX;
@@ -22,7 +21,7 @@
 	int Agent::damage(uint32_t damage)
 	{
 		m_health-=damage;
-		if (m_damage <= 0)
+		if (m_health <= 0)
 			destroy();
 		return 0;
 	}
@@ -32,6 +31,15 @@
 		// scan all, attack, move
 
 		scan();
+		attack();
+		reset_scan();
+		return 0;
+	}
+
+	int Agent::reset_scan()
+	{
+		for( uint32_t i=0; i<AGENTS; i++)
+			m_agents_trace[i] = 0;
 		return 0;
 	}
 
@@ -54,20 +62,25 @@
 			if( (m_positionX - m_env->m_agents[i]->m_positionX) * (m_positionX - m_env->m_agents[i]->m_positionX) +
 				(m_positionY - m_env->m_agents[i]->m_positionY) * (m_positionY - m_env->m_agents[i]->m_positionY) < m_radius * m_radius)
 			{
-				// this Agent it's in range
-				printf("X: %f Y: %f TEAM: %i\n", m_env->m_agents[i]->m_positionX, m_env->m_agents[i]->m_positionY, m_env->m_agents[i]->m_team);
+				// this Agent it's in range [i]
+				//printf("X: %f Y: %f TEAM: %i\n", m_env->m_agents[i]->m_positionX, m_env->m_agents[i]->m_positionY, m_env->m_agents[i]->m_team);
+				if(m_env->m_agents[i]->m_killed == false)
+					m_agents_trace[i] = 1;
 			}
 		}
 		return 0;
 	}
 
-	int Agent::attack(Agent* agents)
+	int Agent::attack()
 	{
-
+		for(uint32_t i=0; i<AGENTS; i++)
+			if( m_agents_trace[i] == 1)
+				m_env->m_agents[i]->damage(m_damage);
+		return 0;
 	}
 
 	int Agent::destroy()
 	{
-		//to do
+		m_killed = true;
 		return 0;
 	}
