@@ -318,7 +318,6 @@ if (LINUX)
 	)
 
 	list (APPEND OS_SRC
-		os/linux/main.cpp
 		os/linux/LinuxOS.cpp
 		os/linux/OsWindow.cpp
 		os/posix/TCPSocket.cpp
@@ -354,7 +353,6 @@ if (LINUX)
 	)
 
 	set (CROWN_EXECUTABLE_NAME crown-linux)
-	set (CROWN_MAIN_SRC os/linux/main.cpp)
 endif (LINUX)
 
 if (WINDOWS)
@@ -397,7 +395,6 @@ if (WINDOWS)
 	set (COMPILER_FLAGS /link /OPT:NOREF)
 	
 	set (CROWN_EXECUTABLE_NAME crown-win)
-	set (CROWN_MAIN_SRC os/win/main.cpp)
 endif(WINDOWS)
 
 set (CROWN_SOURCES
@@ -454,11 +451,7 @@ add_definitions(${COMPILER_FLAGS})
 
 add_library(crown SHARED ${CROWN_SOURCES} ${CROWN_HEADERS})
 
-add_executable(${CROWN_EXECUTABLE_NAME} ${CROWN_MAIN_SRC})
-target_link_libraries(${CROWN_EXECUTABLE_NAME} crown)
-
 install (TARGETS crown DESTINATION lib/${CMAKE_PROJECT_NAME})
-install (TARGETS ${CROWN_EXECUTABLE_NAME} DESTINATION bin)
 
 install (FILES ${HEADERS} DESTINATION include/${CMAKE_PROJECT_NAME})
 
