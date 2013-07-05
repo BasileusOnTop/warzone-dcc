@@ -1,12 +1,12 @@
-#include "environment.h"
-#include "agent.h"
+#include "Environment.h"
+#include "Agent.h"
 
 
 Environment::Environment()
 {
 	for(uint32_t i=0; i<AGENTS; i++)
 	{
-		m_agents[i] = new Agent(10, 10, 1, 0, 0, 3, *this);
+		m_agents[i] = new Agent(10, 10, i, 0, 5, (Factions)(i%2), this);
 	}
 }
 
