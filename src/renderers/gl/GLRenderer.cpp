@@ -812,14 +812,18 @@ void GLRenderer::get_scissor_params(int32_t& x, int32_t& y, int32_t& width, int3
 }
 
 //-----------------------------------------------------------------------------
-void GLRenderer::frame()
+void GLRenderer::begin_frame()
 {
 	// Clear frame/depth buffer
 	GL_CHECK(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 
 	// Bind the default gpu program
-	bind_gpu_program(m_default_gpu_program);
+	//bind_gpu_program(m_default_gpu_program);
+}
 
+//-----------------------------------------------------------------------------
+void GLRenderer::end_frame()
+{
 	GL_CHECK(glFinish());
 
 	m_context.swap_buffers();
@@ -838,22 +842,21 @@ void GLRenderer::set_matrix(MatrixType type, const Mat4& matrix)
 
 	switch (type)
 	{
-		case MT_VIEW:
-		case MT_MODEL:
-		{
-			m_model_view_matrix = m_matrix[MT_VIEW] * m_matrix[MT_MODEL];
-			break;
-		}
-		case MT_PROJECTION:
-		{
-			m_model_view_projection_matrix =  m_matrix[MT_PROJECTION] * m_model_view_matrix;
-			break;
-		}
-		default:
-		{
-			break;
-			CE_ASSERT(0, "");
-		}
+	case MT_VIEW:
+	case MT_MODEL:
+		glMatrixMode(GL_MODELVIEW);
+		// Transformations must be listed in reverse order
+		glLoadMatrixf((m_matrix[MT_VIEW] * m_matrix[MT_MODEL]).to_float_ptr());
+		break;
+	case MT_PROJECTION:
+		glMatrixMode(GL_PROJECTION);
+		glLoadMatrixf(m_matrix[MT_PROJECTION].to_float_ptr());
+		break;
+	default:
+	{
+		break;
+		CE_ASSERT(0, "");
+	}
 	}
 }
 

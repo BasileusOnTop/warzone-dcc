@@ -166,8 +166,9 @@ public:
 	//virtual void			destroy_render_buffer(RenderBufferId id) = 0;
 
 	///	Tasks to perform before a frame is rendered.
-	virtual void			frame() = 0;
-
+	virtual void			begin_frame() = 0;
+	virtual void			end_frame() = 0;
+	
 	/// Sets the clearing color of the framebuffer.
 	virtual void			set_clear_color(const Color4& color) = 0;
 

@@ -316,10 +316,13 @@ void Device::frame(void (*framegame)(float))
 	m_window->frame();
 	m_input_manager->frame();
 
+	m_renderer->begin_frame();
+
 	framegame(last_delta_time());
 
 	m_debug_renderer->draw_all();
-	m_renderer->frame();
+
+	m_renderer->end_frame();
 
 	m_frame_count++;
 }
