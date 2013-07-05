@@ -2,9 +2,11 @@ cmake_minimum_required(VERSION 2.8)
 
 set (SRC
 	main.cpp
+	RenderWorld.cpp
 )
 
 set (HEADERS
+	RenderWorld.h
 )
 
 add_executable(warzone ${SRC} ${HEADERS})
