@@ -12,5 +12,7 @@ Environment::Environment()
 
 int Environment::update()
 {
+	for(uint32_t i=0; i<AGENTS; i++)
+		m_agents[i]->update();
 	return 0;
 }
