@@ -62,10 +62,10 @@ public:
 
 	/// Initializes the engine allowing to pass command line
 	/// parameters to configure some parameters.
-	bool					init(int argc, char** argv);
+	bool					init(int argc, char** argv, void (*initgame)(void));
 
 	/// Shutdowns the engine freeing all the allocated resources
-	void					shutdown();
+	void					shutdown(void (*shutdowngame)(void));
 
 	/// Returns wheter the engine is running (i.e. it is actually
 	/// doing work).
@@ -90,7 +90,7 @@ public:
 	void					stop();
 
 	/// Updates all the subsystems
-	void					frame();
+	void					frame(void (*framegame)(float));
 
 	/// Loads a resource and returns its unique identifier.
 	ResourceId				load(const char* name);

@@ -94,7 +94,7 @@ Device::~Device()
 }
 
 //-----------------------------------------------------------------------------
-bool Device::init(int argc, char** argv)
+bool Device::init(int argc, char** argv, void (*initgame)(void))
 {
 	if (is_init())
 	{
@@ -126,23 +126,17 @@ bool Device::init(int argc, char** argv)
 
 	Log::i("Initializing Game...");
 
-	// Initialize the game through init game function
-	crown::init();
-
 	m_is_init = true;
 
 	start();
 
-	if (m_quit_after_init == 1)
-	{
-		shutdown();
-	}
+	initgame();
 
 	return true;
 }
 
 //-----------------------------------------------------------------------------
-void Device::shutdown()
+void Device::shutdown(void (*shutdowngame)(void))
 {
 	if (is_init() == false)
 	{
@@ -150,8 +144,7 @@ void Device::shutdown()
 		return;
 	}
 
-	// Shutdowns the game
-	crown::shutdown();
+	shutdowngame();
 	
 	if (m_input_manager)
 	{
@@ -311,7 +304,7 @@ float Device::last_delta_time() const
 }
 
 //-----------------------------------------------------------------------------
-void Device::frame()
+void Device::frame(void (*framegame)(float))
 {
 	m_current_time = os::microseconds();
 	m_last_delta_time = (m_current_time - m_last_time) / 1000000.0f;
@@ -323,7 +316,7 @@ void Device::frame()
 	m_window->frame();
 	m_input_manager->frame();
 
-	crown::frame(last_delta_time());
+	framegame(last_delta_time());
 
 	m_debug_renderer->draw_all();
 	m_renderer->frame();
