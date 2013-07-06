@@ -104,8 +104,8 @@ void RenderWorld::render_turret(Agent* agent)
 {
 	DebugRenderer* dr = device()->debug_renderer();
 
-	const float& x = agent->m_positionX;
-	const float& y = agent->m_positionY;
+	const float& x = agent->m_coord_x;
+	const float& y = agent->m_coord_y;
 
 	dr->add_hexagon(Vec3(x, y, -1.0f), 25.0f, Color4::RED, true);
 
@@ -120,8 +120,8 @@ void RenderWorld::render_unit(Agent* agent)
 {
 	DebugRenderer* dr = device()->debug_renderer();
 
-	const float& x = agent->m_positionX;
-	const float& y = agent->m_positionY;
+	const float& x = agent->m_coord_x;
+	const float& y = agent->m_coord_y;
 
 	dr->add_circle(Vec3(x, y, -1.0f), 16.0f, Color4::RED, true);
 

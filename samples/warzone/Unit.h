@@ -7,16 +7,16 @@ class Environment;
 
 class Unit : public Agent
 {
-	uint32_t m_speed;
+	float 		m_speed;
 
 public: // Constructor
 
 
-	Unit(uint32_t health, uint32_t damage, uint32_t speed, float positionX, float positionY, float radius, Factions team, Environment* env);
+	Unit(uint32_t health, uint32_t damage, float speed, float coord_x, float coord_y, float radius, Factions team, Environment* env);
 
 private:
 	
-	int move();
-	int update();
+	int 			move();
+	int 			update();
 };
 
