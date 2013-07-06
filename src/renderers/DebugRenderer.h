@@ -57,6 +57,7 @@ public:
 	void		add_box(const Vec3& min, const Vec3& max, const Color4& color, bool depth_write);
 
 	void		add_hexagon(const Vec3& center, float radius, const Color4& color, bool depth_write);
+	void		add_circle(const Vec3& center, const float radius, const Color4& color, bool depth_write);
 
 private:
 

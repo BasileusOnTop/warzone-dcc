@@ -146,6 +146,24 @@ void DebugRenderer::add_hexagon(const Vec3& center, float radius, const Color4& 
 }
 
 //-----------------------------------------------------------------------------
+void DebugRenderer::add_circle(const Vec3& center, const float radius, const Color4& color, bool depth_write)
+{
+	const uint32_t deg_step = 15;
+
+	// XY plane
+	for (uint32_t deg = 0; deg < 360; deg += deg_step)
+	{
+		float rad0 = math::deg_to_rad(deg);
+		float rad1 = math::deg_to_rad(deg + deg_step);
+
+		Vec3 start(math::cos(rad0) * radius, math::sin(rad0) * radius, 0);
+		Vec3 end  (math::cos(rad1) * radius, math::sin(rad1) * radius, 0);
+
+		add_line(center + start, center + end, color, depth_write);
+	}
+}
+
+//-----------------------------------------------------------------------------
 void DebugRenderer::draw_all()
 {
 	if (m_lines_count > 0)
