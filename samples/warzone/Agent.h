@@ -43,6 +43,7 @@ public:
 	virtual int update();
 	virtual Type get_type();
 	int damage(uint32_t damage);
+	float area_of_effect();
 
 
 };

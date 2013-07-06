@@ -27,6 +27,12 @@
 		return 0;
 	}
 
+	float Agent::area_of_effect()
+	{
+		return m_radius;
+	}
+
+
 	int Agent::update()
 	{
 		// scan all, attack, move
