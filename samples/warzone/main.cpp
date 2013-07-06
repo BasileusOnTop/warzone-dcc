@@ -17,9 +17,18 @@ void init()
 //-----------------------------------------------------------------------------
 void frame(float dt)
 {
-	if (device()->keyboard()->key_pressed(KC_ESCAPE))
+	Keyboard* keyb = device()->keyboard();
+
+	// Exit game
+	if (keyb->key_pressed(KC_ESCAPE))
 	{
 		device()->stop();
+	}
+
+	// Debug mode on/off
+	if (keyb->key_pressed(KC_d))
+	{
+		rw.enable_debug(!rw.debug());
 	}
 
 	rw.frame();
