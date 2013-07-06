@@ -1,13 +1,21 @@
 #include "Environment.h"
 #include "Agent.h"
 #include "Unit.h"
-
+#include "Random.h"
+#include "OS.h"
 
 Environment::Environment()
 {
+	crown::Random random(crown::os::microseconds());
+
 	for(uint32_t i=0; i<AGENTS; i++)
 	{
-		m_agents[i] = new Unit(10, 8, 0, i, 0, 5, (Factions)(i%2), this);
+		// Generate random x,y in a 400 * 400 pixels area
+		// centered at the origin (middle of the window)
+		float rand_x = (random.unit_float() - 0.5f) * 400.0f;
+		float rand_y = (random.unit_float() - 0.5f) * 400.0f;
+
+		m_agents[i] = new Unit(10, 8, 2.0f, rand_x, rand_y, 5, (Factions)(i%2), this);
 	}
 
 	m_items = 0;
