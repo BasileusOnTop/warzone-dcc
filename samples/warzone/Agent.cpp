@@ -6,6 +6,7 @@
 	Agent::Agent(uint32_t health, uint32_t damage, float positionX, float positionY, float radius, Factions team, Environment* env) 
 	{
 		m_killed = false;
+		m_type = TURRET;
 		reset_scan();
 
 		m_health = health;
@@ -34,6 +35,11 @@
 		attack();
 		reset_scan();
 		return 0;
+	}
+
+	Type Agent::get_type()
+	{
+		return m_type;
 	}
 
 	int Agent::reset_scan()
@@ -66,7 +72,7 @@
 				//printf("X: %f Y: %f TEAM: %i\n", m_env->m_agents[i]->m_positionX, m_env->m_agents[i]->m_positionY, m_env->m_agents[i]->m_team);
 				if(m_env->m_agents[i]->m_killed == false)
 					m_agents_trace[i] = 1;
-			}
+			}//ciao
 		}
 		return 0;
 	}
@@ -74,8 +80,10 @@
 	int Agent::attack()
 	{
 		for(uint32_t i=0; i<AGENTS; i++)
-			if( m_agents_trace[i] == 1)
-				m_env->m_agents[i]->damage(m_damage);
+			if( (m_agents_trace[i] == 1) &&
+				m_env->m_agents[i]->m_team != m_team)
+
+					m_env->m_agents[i]->damage(m_damage);
 		return 0;
 	}
 

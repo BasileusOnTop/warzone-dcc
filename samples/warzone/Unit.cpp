@@ -6,6 +6,7 @@ Unit::Unit(uint32_t health, uint32_t damage, uint32_t speed, float positionX, fl
 	:Agent(health, damage, positionX, positionY, radius, team, env)
 {
 	m_speed = speed;
+	m_type = UNIT;
 }
 
 int Unit::move()

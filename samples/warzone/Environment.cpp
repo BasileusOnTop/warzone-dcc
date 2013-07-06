@@ -5,10 +5,12 @@
 
 Environment::Environment()
 {
-	for(uint32_t i=0; i<AGENTS; i++)
+	/*for(uint32_t i=0; i<AGENTS; i++)
 	{
 		m_agents[i] = new Unit(10, 8, 0, i, 0, 5, (Factions)(i%2), this);
-	}
+	}*/
+
+	m_items = 0;
 }
 
 int Environment::update()
@@ -16,4 +18,9 @@ int Environment::update()
 	for(uint32_t i=0; i<AGENTS; i++)
 		m_agents[i]->update();
 	return 0;
+}
+
+int Environment::add_agent(Agent a)
+{
+	
 }
