@@ -15,6 +15,7 @@ set (HEADERS
 	Environment.h
 )
 
+add_definitions(-g -pg)
 add_executable(warzone ${SRC} ${HEADERS})
 target_link_libraries(warzone crown)
 
