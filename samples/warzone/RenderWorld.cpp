@@ -8,7 +8,8 @@
 
 //-----------------------------------------------------------------------------
 RenderWorld::RenderWorld(Environment* env) :
-	m_env(env)
+	m_env(env),
+	m_debug(false)
 {
 }
 
@@ -82,6 +83,18 @@ void RenderWorld::render_agents()
 }
 
 //-----------------------------------------------------------------------------
+bool RenderWorld::debug()
+{
+	return m_debug;
+}
+
+//-----------------------------------------------------------------------------
+void RenderWorld::enable_debug(bool enable)
+{
+	m_debug = enable;
+}
+
+//-----------------------------------------------------------------------------
 void RenderWorld::render_hq(Agent* agent)
 {
 }
@@ -95,6 +108,11 @@ void RenderWorld::render_turret(Agent* agent)
 	const float& y = agent->m_positionY;
 
 	dr->add_hexagon(Vec3(x, y, -1.0f), 25.0f, Color4::RED, true);
+
+	if (m_debug)
+	{
+		dr->add_circle(Vec3(x, y, -1.0f), agent->area_of_effect(), Color4::GREEN, true);
+	}
 }
 
 //-----------------------------------------------------------------------------
@@ -105,5 +123,10 @@ void RenderWorld::render_unit(Agent* agent)
 	const float& x = agent->m_positionX;
 	const float& y = agent->m_positionY;
 
-	dr->add_circle(Vec3(x, y, -1.0f), 16.0f, Color4::RED, true);	
+	dr->add_circle(Vec3(x, y, -1.0f), 16.0f, Color4::RED, true);
+
+	if (m_debug)
+	{
+		dr->add_circle(Vec3(x, y, -1.0f), agent->area_of_effect(), Color4::GREEN, true);
+	}
 }
