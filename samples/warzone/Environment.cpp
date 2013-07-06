@@ -15,7 +15,7 @@ Environment::Environment()
 		float rand_x = (random.unit_float() - 0.5f) * 400.0f;
 		float rand_y = (random.unit_float() - 0.5f) * 400.0f;
 
-		m_agents[i] = new Unit(10, 8, 2.0f, rand_x, rand_y, 5, (Factions)(i%2), this);
+		m_agents[i] = new Unit(10, 8, 2.0f, rand_x, rand_y, 45.0f, (Factions)(i%2), this);
 	}
 
 	m_items = 0;
