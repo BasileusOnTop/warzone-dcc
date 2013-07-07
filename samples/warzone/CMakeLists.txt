@@ -3,15 +3,17 @@ cmake_minimum_required(VERSION 2.8)
 set (SRC
 	main.cpp
 	RenderWorld.cpp
-	Unit.cpp
 	Agent.cpp
+	Unit.cpp
+	Turret.cpp
 	Environment.cpp
 )
 
 set (HEADERS
 	RenderWorld.h
-	Unit.h
 	Agent.h
+	Unit.h
+	Turret.h
 	Environment.h
 )
 
