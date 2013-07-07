@@ -6,4 +6,11 @@ Turret::Turret(uint32_t health, uint32_t damage, float coord_x, float coord_y, f
 	:Agent(health, damage, coord_x, coord_y, radius, team, env)
 {
 	m_type 		= TURRET; //THIS IS OK
+	m_gun_dir	= Vec2(1, 0);
+}
+
+//-----------------------------------------------------------------------------
+const Vec2& Turret::gun_dir()
+{
+	return m_gun_dir;
 }
