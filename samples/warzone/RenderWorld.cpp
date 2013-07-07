@@ -11,7 +11,7 @@
 //-----------------------------------------------------------------------------
 RenderWorld::RenderWorld(Environment* env) :
 	m_env(env),
-	m_debug(false)
+	m_debug(true)
 {
 }
 
@@ -48,7 +48,7 @@ void RenderWorld::shutdown()
 //-----------------------------------------------------------------------------
 void RenderWorld::render_agents()
 {
-	for (uint32_t i = 0; i < AGENTS; i++)
+	for (uint32_t i = 0; i < m_env->agent_count(); i++)
 	{
 		Agent* ith = m_env->m_agents[i];
 
@@ -109,10 +109,9 @@ void RenderWorld::render_turret(Turret* agent)
 	const float& x = agent->m_coord_x;
 	const float& y = agent->m_coord_y;
 
-
-
 	// Base shape
 	dr->add_hexagon(Vec3(x, y, -1.0f), 25.0f, Color4::RED, true);
+	dr->add_hexagon(Vec3(x, y, -1.0f), 10.0f, Color4::RED, true);
 
 	// Gun shape
 	Vec2 gun_dir = agent->gun_dir();
