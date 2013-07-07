@@ -4,6 +4,7 @@
 
 class Agent;
 class Unit;
+class Turret;
 
 static const uint32_t AGENTS = 10;
 
@@ -19,7 +20,10 @@ public:
 	Environment();
 
 	int 		update();
+
+	// this is not the right way I guess :-)
 	int 		add_agent(Agent* a);
 	int 		add_agent(Unit* a);
+	int 		add_agent(Turret* a);
 
 };
