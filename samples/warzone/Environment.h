@@ -6,24 +6,25 @@ class Agent;
 class Unit;
 class Turret;
 
-static const uint32_t AGENTS = 10;
+static const uint32_t AGENTS = 15;
 
 class Environment
 {
 
 private:
-	uint32_t 	m_items; // number of agents
+
+	uint32_t	m_agent_count;
 
 public:
+
 	Agent* 		m_agents[AGENTS];
 
-	Environment();
+public:
+
+				Environment();
+
+	uint32_t	agent_count();
 
 	int 		update();
-
-	// this is not the right way I guess :-)
 	int 		add_agent(Agent* a);
-	int 		add_agent(Unit* a);
-	int 		add_agent(Turret* a);
-
 };
