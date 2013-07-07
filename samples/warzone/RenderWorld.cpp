@@ -5,6 +5,8 @@
 #include "OsWindow.h"
 #include "Environment.h"
 #include "Agent.h"
+#include "Turret.h"
+#include "Unit.h"
 
 //-----------------------------------------------------------------------------
 RenderWorld::RenderWorld(Environment* env) :
@@ -65,12 +67,12 @@ void RenderWorld::render_agents()
 			}
 			case TURRET:
 			{
-				render_turret(ith);
+				render_turret((Turret*)ith);
 				break;
 			}
 			case UNIT:
 			{
-				render_unit(ith);
+				render_unit((Unit*)ith);
 				break;
 			}
 			case NONE:
@@ -100,14 +102,23 @@ void RenderWorld::render_hq(Agent* agent)
 }
 
 //-----------------------------------------------------------------------------
-void RenderWorld::render_turret(Agent* agent)
+void RenderWorld::render_turret(Turret* agent)
 {
 	DebugRenderer* dr = device()->debug_renderer();
 
 	const float& x = agent->m_coord_x;
 	const float& y = agent->m_coord_y;
 
+
+
+	// Base shape
 	dr->add_hexagon(Vec3(x, y, -1.0f), 25.0f, Color4::RED, true);
+
+	// Gun shape
+	Vec2 gun_dir = agent->gun_dir();
+	gun_dir *= 50.0f;
+
+	dr->add_line(Vec3(x, y, -1.0f), Vec3(x, y, -1.0f) + Vec3(gun_dir.x, gun_dir.y, -1.0f), Color4::RED, true);
 
 	if (m_debug)
 	{
@@ -116,7 +127,7 @@ void RenderWorld::render_turret(Agent* agent)
 }
 
 //-----------------------------------------------------------------------------
-void RenderWorld::render_unit(Agent* agent)
+void RenderWorld::render_unit(Unit* agent)
 {
 	DebugRenderer* dr = device()->debug_renderer();
 

@@ -5,6 +5,8 @@ using namespace crown;
 
 class Environment;
 class Agent;
+class Turret;
+class Unit;
 
 class RenderWorld
 {
@@ -24,8 +26,8 @@ public:
 private:
 
 	void			render_hq(Agent* agent);
-	void			render_turret(Agent* agent);
-	void			render_unit(Agent* agent);
+	void			render_turret(Turret* agent);
+	void			render_unit(Unit* agent);
 
 private:
 
