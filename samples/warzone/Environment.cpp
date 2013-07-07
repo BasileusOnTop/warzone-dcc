@@ -14,11 +14,11 @@ Environment::Environment() :
 	const float bound_x[2] = {-400.0f, 400.0f};
 	const float bound_y[2] = {-200.0f, 200.0f};
 
-	add_agent(new Turret(10, 8, -350.0f,  150.0f, 100.0f, RED, this));
-	add_agent(new Turret(10, 8, -350.0f, -150.0f, 100.0f, RED, this));
+	add_agent(new Turret(10, 8, -350.0f,  150.0f, 150.0f, RED, this));
+	add_agent(new Turret(10, 8, -350.0f, -150.0f, 150.0f, RED, this));
 
-	add_agent(new Turret(10, 8, 350.0f,  150.0f, 100.0f, RED, this));
-	add_agent(new Turret(10, 8, 350.0f, -150.0f, 100.0f, RED, this));
+	add_agent(new Turret(10, 8, 350.0f,  150.0f, 150.0f, RED, this));
+	add_agent(new Turret(10, 8, 350.0f, -150.0f, 150.0f, RED, this));
 
 	for(uint32_t i=0; i<AGENTS; i++)
 	{
