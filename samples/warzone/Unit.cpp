@@ -2,8 +2,8 @@
 #include "Unit.h"
 #include "Environment.h"
 
-Unit::Unit(const Vec2& pos, float radius, Faction team, Environment* env) 
-	:Agent(pos, radius, team, env)
+Unit::Unit(const Vec2& pos, Faction team, Environment* env) 
+	:Agent(pos, team, env)
 {
 	m_dir		= Vec2(0, 0);
 

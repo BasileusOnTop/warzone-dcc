@@ -32,7 +32,7 @@ private:
 	int 				destroy();
 
 public:
-	Agent(const Vec2& pos, float radius, Faction team, Environment* env);
+	Agent(const Vec2& pos, Faction team, Environment* env);
 
 	virtual int 		update();
 	virtual Type 		get_type();

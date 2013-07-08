@@ -8,13 +8,12 @@ class Environment;
 
 class Unit : public Agent
 {
-private:
-
-	Vec2		m_dir;
+protected:
 	float 		m_speed;
+	Vec2		m_dir;
 
 public: 
-	Unit(const Vec2& pos, float radius, Faction team, Environment* env);
+	Unit(const Vec2& pos, Faction team, Environment* env);
 
 private:
 

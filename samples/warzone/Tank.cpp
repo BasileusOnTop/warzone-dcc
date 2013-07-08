@@ -2,12 +2,13 @@
 #include "Tank.h"
 #include "Environment.h"
 
-Tank::Tank(const Vec2& pos, float radius, Faction team, Environment* env) 
-	:Unit(pos, radius, team, env)
+Tank::Tank(const Vec2& pos, Faction team, Environment* env) 
+	:Unit(pos, team, env)
 {
 
 	m_health			= 1000;
 	m_damage			= 30;
+	m_radius			= 20.0f;
 	m_speed 			= 8.0f;
 	m_type 				= TANK;
 	m_cooldown 			= 10;

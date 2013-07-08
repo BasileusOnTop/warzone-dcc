@@ -15,7 +15,7 @@ private:
 	uint32_t 			m_cooldown_actual;
 
 public: 
-	Tank(const Vec2& pos, float radius, Faction team, Environment* env);
+	Tank(const Vec2& pos, Faction team, Environment* env);
 
 private:
 

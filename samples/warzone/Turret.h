@@ -18,7 +18,7 @@ private:
 
 
 public:
-	Turret(uint32_t health, uint32_t damage, const Vec2& pos, float radius, Faction team, Environment* env);
+	Turret(const Vec2& pos, Faction team, Environment* env);
 
 	const Vec2&					gun_dir();
 };

@@ -2,10 +2,13 @@
 #include "Turret.h"
 #include "Environment.h"
 
-Turret::Turret(uint32_t health, uint32_t damage, const Vec2& pos, float radius, Faction team, Environment* env) 
-	:Agent(health, damage, pos, radius, team, env)
+Turret::Turret(const Vec2& pos, Faction team, Environment* env) 
+	:Agent(pos, team, env)
 {
-	m_type 		= TURRET; //THIS IS OK
+	m_health = 1500;
+	m_damage = 20;
+	m_radius = 30.0f;
+	m_type 		= TURRET;
 	m_gun_dir	= Vec2(1, 0);
 }
 
