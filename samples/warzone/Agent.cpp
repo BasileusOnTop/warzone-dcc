@@ -8,15 +8,18 @@ using namespace crown;
 Agent::Agent(const Vec2& pos, Faction team, int32_t health, Environment* env)
 	: m_initial_health(health)
 {
-	m_type 		= NONE;
+	m_type 			= NONE;
 
-	m_health 	= 0;
-	m_damage 	= 0;
-	m_radius 	= 0.0f;
+	m_health 		= 0;
+	m_damage 		= 0;
+	m_radius 		= 0.0f;
 
-	m_pos		= pos;
-	m_team 		= team;
-	m_env 		= env;
+	m_pos			= pos;
+	m_team 			= team;
+	m_env 			= env;
+
+	m_cooldown 		= false;
+	m_dt_elapsed 	= 0.0f;
 }
 
 //-----------------------------------------------------------------------------

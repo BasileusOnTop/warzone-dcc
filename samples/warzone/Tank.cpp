@@ -11,7 +11,6 @@ Tank::Tank(const Vec2& pos, Faction team, int32_t health, Environment* env)
 	m_radius			= 75.0f;
 	m_speed 			= 8.0f;
 	m_type 				= TANK;
-	m_cooldown 			= 10.0f;
 }
 
 int Tank::update(float dt)
@@ -21,12 +20,19 @@ int Tank::update(float dt)
 		return -1;
 	}
 
-	bool hit = false;
-
-	int ret = 0;
-
-	if(on_cooldown())
+	if( m_cooldown == true)
 	{
+		m_dt_elapsed += dt;
+
+		if( m_dt_elapsed >= 10.0f)
+		{
+			m_dt_elapsed = 0.0f;
+			m_cooldown = false;
+		}
+	}
+	if( m_cooldown == false)
+	{
+
 		for(uint32_t i=0; i<m_env->agent_count(); i++)
 		{
 			Agent* ith = m_env->m_agents[i];
@@ -44,36 +50,15 @@ int Tank::update(float dt)
 				if((!ith->is_dead()) && (ith->get_faction() != m_team))
 				{
 					ith->damage(m_damage);
-					hit = true;
-					ret = 1;
+					m_cooldown = true;
+					break;
 				}
 			}
 		}
 	}
-	else
-	{
-		hit = true;
-	}
-
-	if (hit)
-	{
-		m_cooldown -= 1.0f * dt;
-	}
-
-	if(on_cooldown())
-		move(dt);
 	
-	return ret;
-}
-
-bool Tank::on_cooldown()
-{
-	bool t = (m_cooldown >= 10.0f);
-
-	if (!t)
+	if (m_cooldown == false)
 	{
-		m_cooldown = 10.0f;
+		move(dt);
 	}
-
-	return t;
 }

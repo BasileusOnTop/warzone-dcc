@@ -25,6 +25,9 @@ protected:
 	Type 				m_type;
 	Faction 			m_team;
 
+	float				m_dt_elapsed;
+	bool				m_cooldown;
+
 public:
 
 	Vec2				m_pos;

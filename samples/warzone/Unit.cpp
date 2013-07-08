@@ -30,31 +30,50 @@ int Unit::move(float dt)
 
 int Unit::update(float dt)
 {
-	bool hit = false;
 
-	for(uint32_t i=0; i<m_env->agent_count(); i++)
+	if (is_dead())
 	{
-		Agent* ith = m_env->m_agents[i];
+		return -1;
+	}
 
-		// If it's me
-		if (ith == this)
+	if( m_cooldown == true)
+	{
+		m_dt_elapsed += dt;
+
+		if( m_dt_elapsed >= 3.0f)
 		{
-			continue;
+			m_dt_elapsed = 0.0f;
+			m_cooldown = false;
 		}
+	}
+	if( m_cooldown == false)
+	{
 
-		// Euclidian norm
-		if( (m_pos.x - ith->m_pos.x) * (m_pos.x - ith->m_pos.x) +
-			(m_pos.y - ith->m_pos.y) * (m_pos.y - ith->m_pos.y) <= m_radius * m_radius)
+		for(uint32_t i=0; i<m_env->agent_count(); i++)
 		{
-			if((!ith->is_dead()) && (ith->get_faction() != m_team))
+			Agent* ith = m_env->m_agents[i];
+
+			// If it's me
+			if (ith == this)
 			{
-				ith->damage(m_damage);
-				hit = true;
+				continue;
+			}
+
+			// Euclidian norm
+			if( (m_pos.x - ith->m_pos.x) * (m_pos.x - ith->m_pos.x) +
+				(m_pos.y - ith->m_pos.y) * (m_pos.y - ith->m_pos.y) <= m_radius * m_radius)
+			{
+				if((!ith->is_dead()) && (ith->get_faction() != m_team))
+				{
+					ith->damage(m_damage);
+					m_cooldown = true;
+					break;
+				}
 			}
 		}
 	}
 
-	if (!hit)
+	if (m_cooldown == false)
 	{
 		move(dt);
 	}
