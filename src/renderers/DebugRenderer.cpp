@@ -148,7 +148,7 @@ void DebugRenderer::add_hexagon(const Vec3& center, float radius, const Color4& 
 //-----------------------------------------------------------------------------
 void DebugRenderer::add_circle(const Vec3& center, const float radius, const Color4& color, bool depth_write)
 {
-	const uint32_t deg_step = 15;
+	const uint32_t deg_step = 10;
 
 	// XY plane
 	for (uint32_t deg = 0; deg < 360; deg += deg_step)

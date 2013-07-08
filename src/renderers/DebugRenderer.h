@@ -33,7 +33,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 namespace crown
 {
 
-const uint32_t MAX_DEBUG_LINES = 4096;
+const uint32_t MAX_DEBUG_LINES = 8192;
 
 class Renderer;
 

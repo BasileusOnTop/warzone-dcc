@@ -198,6 +198,8 @@ void GLRenderer::init()
 	Log::i("OpenGL Renderer initialized.");
 
 	load_default_shaders();
+
+	glLineWidth(2.0f);
 }
 
 //-----------------------------------------------------------------------------
