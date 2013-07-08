@@ -25,6 +25,11 @@ void frame(float dt)
 		device()->stop();
 	}
 
+	if (keyb->key_pressed(KC_F4))
+	{
+		m.spawn_units();
+	}
+
 	// Debug mode on/off
 	if (keyb->key_pressed(KC_d))
 	{
