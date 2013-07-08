@@ -11,16 +11,14 @@ class Tank : public Unit
 {
 private:
 
-	uint32_t 			m_cooldown;
-	uint32_t 			m_cooldown_actual;
+	float 			m_cooldown;
 
 public: 
 	Tank(const Vec2& pos, Faction team, Environment* env);
 
 private:
 
-	int 				move(float dt);
-	int 				update(float dt);
-	bool				on_cooldown();
+	int 			update(float dt);
+	bool			on_cooldown();
 	
 };

@@ -62,6 +62,8 @@ void RenderWorld::render_agents()
 			continue;
 		}
 
+		render_health(ith);
+
 		switch (ith->get_type())
 		{
 			case HQ:
@@ -84,8 +86,8 @@ void RenderWorld::render_agents()
 				render_tank((Tank*)ith);
 				break;
 			}
+			// Never
 			case NONE:
-			default:
 			{
 				break;
 			}
@@ -178,6 +180,23 @@ void RenderWorld::render_bounds()
 	DebugRenderer* dr = device()->debug_renderer();
 
 	dr->add_line(Vec3(0.0f, -625.0f/2.0f, -1.0f), Vec3(0.0f, 625.0f/2.0f, -1.0f), Color4::YELLOW, true);
+}
+
+//-----------------------------------------------------------------------------
+void RenderWorld::render_health(Agent* agent)
+{
+	DebugRenderer* dr = device()->debug_renderer();
+	const float& x = agent->m_pos.x;
+	const float& y = agent->m_pos.y;
+
+	int32_t health = agent->get_health();
+
+	// [0.0f..1.0f]
+	float health_percent = health / MAX_HEALTH;
+	Log::i("%f", health_percent);
+
+	dr->add_line(Vec3(x, y + 50.0f, -1.0f), Vec3(x + 20.0f * health_percent, y + 50.0f, -1.0f), Color4::LIME, true);	
+
 }
 
 //-----------------------------------------------------------------------------

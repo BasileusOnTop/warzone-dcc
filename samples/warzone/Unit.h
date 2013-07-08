@@ -15,7 +15,7 @@ protected:
 public: 
 	Unit(const Vec2& pos, Faction team, Environment* env);
 
-private:
+protected:
 
 	int 			move(float dt);
 	virtual int		update(float dt);

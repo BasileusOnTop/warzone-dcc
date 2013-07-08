@@ -9,6 +9,7 @@ class Environment;
 
 enum Faction {RED = 0, BLUE = 1};
 enum Type {NONE = 0, HQ, TURRET, UNIT, TANK};
+const int32_t MAX_HEALTH = 5000;
 
 class Agent
 {
@@ -33,9 +34,11 @@ private:
 public:
 	Agent(const Vec2& pos, Faction team, Environment* env);
 
-	virtual int 		update(float dt);
+	virtual int 		update(float dt) = 0;
 	virtual Type 		get_type();
+
 	Faction				get_faction();
+	int32_t				get_health();
 	int 				damage(uint32_t damage);
 	float 				area_of_effect();
 	bool				is_dead() const;
