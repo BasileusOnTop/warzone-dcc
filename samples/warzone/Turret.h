@@ -16,7 +16,7 @@ private:
 
 public:
 
-	Turret(const Vec2& pos, Faction team, Environment* env);
+	Turret(const Vec2& pos, Faction team, int32_t health, Environment* env);
 
 	virtual int			update(float dt);
 	const Vec2&			gun_dir();

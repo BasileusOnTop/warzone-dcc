@@ -25,26 +25,25 @@ Environment::Environment() :
 	m_spawn_points[4] = Vec2(200.0f,    0.0f);
 	m_spawn_points[5] = Vec2(250.0f, -125.0f);
 
-	const float bound_x[2] = {-400.0f, 400.0f};
-	const float bound_y[2] = {-200.0f, 200.0f};
+	// Heahquarters
+	add_agent(new Hq(Vec2(-400.0f, 0.0f), RED,  3000, this));
+	add_agent(new Hq(Vec2( 400.0f, 0.0f), BLUE, 3000, this));
 
-	add_agent(new Hq(Vec2(-400.0f, 0.0f), RED, this));
-	add_agent(new Hq(Vec2( 400.0f, 0.0f), BLUE, this));
+	// Spawn turrets
+	add_agent(new Turret(Vec2(-350.0f,  150.0f), RED, 1000, this));
+	add_agent(new Turret(Vec2(-350.0f, -150.0f), RED, 1000, this));
 
-	add_agent(new Turret(Vec2(-350.0f,  150.0f), RED, this));
-	add_agent(new Turret(Vec2(-350.0f, -150.0f), RED, this));
-
-	add_agent(new Turret(Vec2(350.0f,  150.0f), BLUE, this));
-	add_agent(new Turret(Vec2(350.0f, -150.0f), BLUE, this));
+	add_agent(new Turret(Vec2(350.0f,  150.0f), BLUE, 1000, this));
+	add_agent(new Turret(Vec2(350.0f, -150.0f), BLUE, 1000, this));
 
 	// Spawn units
-	add_agent(new Unit(m_spawn_points[0], RED, this));
-	add_agent(new Tank(m_spawn_points[1], RED, this));
-	add_agent(new Unit(m_spawn_points[2], RED, this));
+	add_agent(new Unit(m_spawn_points[0], RED, 200, this));
+	add_agent(new Tank(m_spawn_points[1], RED, 200, this));
+	add_agent(new Unit(m_spawn_points[2], RED, 200, this));
 
-	add_agent(new Unit(m_spawn_points[3], BLUE, this));
-	add_agent(new Tank(m_spawn_points[4], BLUE, this));
-	add_agent(new Unit(m_spawn_points[5], BLUE, this));
+	add_agent(new Unit(m_spawn_points[3], BLUE, 200, this));
+	add_agent(new Tank(m_spawn_points[4], BLUE, 200, this));
+	add_agent(new Unit(m_spawn_points[5], BLUE, 200, this));
 }
 
 //-----------------------------------------------------------------------------
@@ -83,7 +82,7 @@ void Environment::spawn_units()
 	// add_agent(new Tank(m_spawn_points[1], RED, this));
 	// add_agent(new Unit(m_spawn_points[2], RED, this));
 
-	add_agent(new Unit(m_spawn_points[3], BLUE, this));
-	add_agent(new Tank(m_spawn_points[4], BLUE, this));
-	add_agent(new Unit(m_spawn_points[5], BLUE, this));	
+	add_agent(new Unit(m_spawn_points[3], BLUE, 300, this));
+	add_agent(new Tank(m_spawn_points[4], BLUE, 300, this));
+	add_agent(new Unit(m_spawn_points[5], BLUE, 300, this));	
 }

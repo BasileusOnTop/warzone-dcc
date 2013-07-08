@@ -5,7 +5,8 @@
 using namespace crown;
 
 //-----------------------------------------------------------------------------
-Agent::Agent(const Vec2& pos, Faction team, Environment* env) 
+Agent::Agent(const Vec2& pos, Faction team, int32_t health, Environment* env)
+	: m_initial_health(health)
 {
 	m_type 		= NONE;
 
@@ -70,4 +71,10 @@ bool Agent::is_dead() const
 int32_t Agent::get_health()
 {
 	return m_health;
+}
+
+//-----------------------------------------------------------------------------
+int32_t Agent::get_initial_health()
+{
+	return m_initial_health;
 }

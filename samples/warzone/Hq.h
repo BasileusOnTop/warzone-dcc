@@ -12,6 +12,6 @@ class Hq : public Agent
 {
 
 public:
-					Hq(const Vec2& pos, Faction team, Environment* env);
+					Hq(const Vec2& pos, Faction team, int32_t health, Environment* env);
 	virtual int		update(float dt);
 };

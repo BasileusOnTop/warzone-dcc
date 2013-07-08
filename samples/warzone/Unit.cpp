@@ -2,13 +2,13 @@
 #include "Unit.h"
 #include "Environment.h"
 
-Unit::Unit(const Vec2& pos, Faction team, Environment* env) 
-	:Agent(pos, team, env)
+Unit::Unit(const Vec2& pos, Faction team, int32_t health, Environment* env) 
+	:Agent(pos, team, health, env)
 {
 	m_dir		= Vec2(0, 0);
 
+	m_health 	= health;
 	m_speed 	= 5.0f;
-	m_health 	= 500;
 	m_damage	= 10;
 	m_radius	= 50.0f;
 	m_type 		= UNIT;

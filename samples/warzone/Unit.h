@@ -13,7 +13,7 @@ protected:
 	Vec2		m_dir;
 
 public: 
-	Unit(const Vec2& pos, Faction team, Environment* env);
+	Unit(const Vec2& pos, Faction team, int32_t health, Environment* env);
 
 protected:
 

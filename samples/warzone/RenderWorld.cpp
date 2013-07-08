@@ -189,13 +189,10 @@ void RenderWorld::render_health(Agent* agent)
 	const float& x = agent->m_pos.x;
 	const float& y = agent->m_pos.y;
 
-	int32_t health = agent->get_health();
-
 	// [0.0f..1.0f]
-	float health_percent = health / MAX_HEALTH;
-	Log::i("%f", health_percent);
+	float health_percent = (float)agent->get_health() / (float)agent->get_initial_health();
 
-	dr->add_line(Vec3(x, y + 50.0f, -1.0f), Vec3(x + 20.0f * health_percent, y + 50.0f, -1.0f), Color4::LIME, true);	
+	dr->add_line(Vec3(x - 20.0f, y + 35.0f, -1.0f), Vec3(x - 20.0f + (40.0f * health_percent), y + 35.0f, -1.0f), Color4::LIME, true);	
 
 }
 
