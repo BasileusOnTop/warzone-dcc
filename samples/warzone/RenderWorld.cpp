@@ -113,8 +113,8 @@ void RenderWorld::render_hq(Hq* agent)
 	const float& x = agent->m_pos.x;
 	const float& y = agent->m_pos.y;
 
-	dr->add_hexagon(Vec3(x, y - 20.0f, -1.0f), 40.0f, team_color(agent->get_faction()), true);
-	dr->add_hexagon(Vec3(x, y + 20.0f, -1.0f), 40.0f, team_color(agent->get_faction()), true);
+	dr->add_hexagon(Vec3(x, y - 32.0f, -1.0f), 40.0f, team_color(agent->get_faction()), true);
+	dr->add_hexagon(Vec3(x, y + 32.0f, -1.0f), 40.0f, team_color(agent->get_faction()), true);
 }
 
 //-----------------------------------------------------------------------------
