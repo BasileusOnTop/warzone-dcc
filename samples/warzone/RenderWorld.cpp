@@ -35,9 +35,11 @@ void RenderWorld::frame()
 	device()->renderer()->set_matrix(MT_MODEL, Mat4::IDENTITY);
 	device()->renderer()->set_matrix(MT_PROJECTION, m_projection);
 	device()->renderer()->set_matrix(MT_VIEW, Mat4::IDENTITY);
+	device()->renderer()->set_clear_color(Color4::BLACK);
 
 	// Render all the agents, dynamically selecting the shape of each
 	render_agents();
+	render_bounds();
 }
 
 //-----------------------------------------------------------------------------
@@ -139,6 +141,14 @@ void RenderWorld::render_unit(Unit* agent)
 	{
 		dr->add_circle(Vec3(x, y, -1.0f), agent->area_of_effect(), Color4::GREEN, true);
 	}
+}
+
+//-----------------------------------------------------------------------------
+void RenderWorld::render_bounds()
+{
+	DebugRenderer* dr = device()->debug_renderer();
+
+	dr->add_line(Vec3(0.0f, -625.0f/2.0f, -1.0f), Vec3(0.0f, 625.0f/2.0f, -1.0f), Color4::YELLOW, true);
 }
 
 //-----------------------------------------------------------------------------
