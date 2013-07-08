@@ -8,6 +8,7 @@ class Environment;
 class Agent;
 class Turret;
 class Unit;
+class Tank;
 
 class RenderWorld
 {
@@ -29,6 +30,7 @@ private:
 	void			render_hq(Agent* agent);
 	void			render_turret(Turret* agent);
 	void			render_unit(Unit* agent);
+	void			render_tank(Tank* agent);
 	void			render_bounds();
 
 	Color4			team_color(Faction team);

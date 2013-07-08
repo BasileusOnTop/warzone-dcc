@@ -27,7 +27,7 @@ Environment::Environment() :
 	const float bound_x[2] = {-400.0f, 400.0f};
 	const float bound_y[2] = {-200.0f, 200.0f};
 
-	add_agent(new Turret(Vec2(-350.0f,   150.0f), RED, this));
+	add_agent(new Turret(Vec2(-350.0f,  150.0f), RED, this));
 	add_agent(new Turret(Vec2(-350.0f, -150.0f), RED, this));
 
 	add_agent(new Turret(Vec2(350.0f,  150.0f), BLUE, this));
@@ -35,13 +35,12 @@ Environment::Environment() :
 
 	// Spawn units
 	add_agent(new Unit(m_spawn_points[0], RED, this));
-	add_agent(new Unit(m_spawn_points[1], RED, this));
+	add_agent(new Tank(m_spawn_points[1], RED, this));
 	add_agent(new Unit(m_spawn_points[2], RED, this));
 
 	add_agent(new Unit(m_spawn_points[3], BLUE, this));
-	add_agent(new Unit(m_spawn_points[4], BLUE, this));
+	add_agent(new Tank(m_spawn_points[4], BLUE, this));
 	add_agent(new Unit(m_spawn_points[5], BLUE, this));
-
 }
 
 //-----------------------------------------------------------------------------

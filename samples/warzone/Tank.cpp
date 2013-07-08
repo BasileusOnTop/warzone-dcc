@@ -8,7 +8,7 @@ Tank::Tank(const Vec2& pos, Faction team, Environment* env)
 
 	m_health			= 1000;
 	m_damage			= 30;
-	m_radius			= 20.0f;
+	m_radius			= 75.0f;
 	m_speed 			= 8.0f;
 	m_type 				= TANK;
 	m_cooldown 			= 10;

@@ -8,6 +8,7 @@
 #include "Turret.h"
 #include "Unit.h"
 #include "Vec2.h"
+#include "Tank.h"
 
 //-----------------------------------------------------------------------------
 RenderWorld::RenderWorld(Environment* env) :
@@ -77,6 +78,11 @@ void RenderWorld::render_agents()
 				render_unit((Unit*)ith);
 				break;
 			}
+			case TANK:
+			{
+				render_tank((Tank*)ith);
+				break;
+			}
 			case NONE:
 			default:
 			{
@@ -143,6 +149,21 @@ void RenderWorld::render_unit(Unit* agent)
 	}
 }
 
+//-----------------------------------------------------------------------------
+void RenderWorld::render_tank(Tank* agent)
+{
+	DebugRenderer* dr = device()->debug_renderer();
+
+	const float& x = agent->m_pos.x;
+	const float& y = agent->m_pos.y;
+
+	dr->add_rectangle(Vec3(x, y, -1.0f), 16.0f, team_color(agent->get_faction()), true);
+
+	if (m_debug)
+	{
+		dr->add_circle(Vec3(x, y, -1.0f), agent->area_of_effect(), Color4::GREEN, true);
+	}
+}
 //-----------------------------------------------------------------------------
 void RenderWorld::render_bounds()
 {

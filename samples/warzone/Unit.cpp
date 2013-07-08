@@ -10,6 +10,7 @@ Unit::Unit(const Vec2& pos, Faction team, Environment* env)
 	m_speed 	= 5.0f;
 	m_health 	= 100;
 	m_damage	= 10;
+	m_radius	= 50.0f;
 	m_type 		= UNIT;
 }
 

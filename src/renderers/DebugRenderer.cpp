@@ -164,6 +164,15 @@ void DebugRenderer::add_circle(const Vec3& center, const float radius, const Col
 }
 
 //-----------------------------------------------------------------------------
+void DebugRenderer::add_rectangle(const Vec3& center, float radius, const Color4& color, bool depth)
+{
+	add_line(Vec3(center.x - radius, center.y - radius, -1.0f), Vec3(center.x + radius, center.y - radius, -1.0f), color, depth);
+	add_line(Vec3(center.x + radius, center.y - radius, -1.0f), Vec3(center.x + radius, center.y + radius, -1.0f), color, depth);
+	add_line(Vec3(center.x + radius, center.y + radius, -1.0f), Vec3(center.x - radius, center.y + radius, -1.0f), color, depth);
+	add_line(Vec3(center.x - radius, center.y + radius, -1.0f), Vec3(center.x - radius, center.y - radius, -1.0f), color, depth);
+}
+
+//-----------------------------------------------------------------------------
 void DebugRenderer::draw_all()
 {
 	if (m_lines_count > 0)
