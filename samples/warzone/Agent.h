@@ -5,7 +5,7 @@
 class Environment;
 
 enum Factions {RED = 0, BLUE = 1};
-enum Type {NONE = 0, HQ, TURRET, UNIT};
+enum Type {NONE = 0, HQ, TURRET, UNIT, TANK};
 
 class Agent
 {
@@ -37,7 +37,6 @@ private:
 	int 				reset_scan();
 
 public:
-
 	Agent(uint32_t health, uint32_t damage, float coord_x, float coord_y, float radius, Factions team, Environment* env);
 
 	virtual int 		update();

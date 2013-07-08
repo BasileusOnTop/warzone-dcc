@@ -28,6 +28,7 @@ Environment::Environment() :
 		float rand_y = (random.unit_float() - 0.5f) * 400.0f;
 
 		add_agent(new Unit(10, 8, (float)i*2, rand_x, rand_y, 50.0f, (Factions)(i%2), this));
+
 	}
 }
 
