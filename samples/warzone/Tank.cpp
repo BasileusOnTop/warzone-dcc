@@ -39,6 +39,7 @@ bool Tank::on_cooldown()
 {
 	if( m_cooldown_actual == m_cooldown)
 	{
+		m_cooldown_actual = 0;
 		return false;
 	}
 
