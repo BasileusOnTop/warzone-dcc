@@ -8,6 +8,7 @@ using namespace crown;
 class Agent;
 class Unit;
 class Turret;
+class Tank;
 
 static const uint32_t AGENTS = 10;
 static const uint32_t MAX_SPAWN_POINTS = 6;

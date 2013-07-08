@@ -2,12 +2,15 @@
 #include "Unit.h"
 #include "Environment.h"
 
-Unit::Unit(uint32_t health, uint32_t damage, float speed, const Vec2& pos, float radius, Faction team, Environment* env) 
-	:Agent(health, damage, pos, radius, team, env)
+Unit::Unit(const Vec2& pos, float radius, Faction team, Environment* env) 
+	:Agent(pos, radius, team, env)
 {
 	m_dir		= Vec2(0, 0);
-	m_speed 	= speed;
-	m_type 		= UNIT; //THIS IS OK
+
+	m_speed 	= 5.0f;
+	m_health 	= 100;
+	m_damage	= 10;
+	m_type 		= UNIT;
 }
 
 int Unit::move()

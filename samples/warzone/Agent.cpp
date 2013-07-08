@@ -4,18 +4,16 @@
 
 using namespace crown;
 
-Agent::Agent(uint32_t health, uint32_t damage, const Vec2& pos, float radius, Faction team, Environment* env) 
+Agent::Agent(const Vec2& pos, Faction team, Environment* env) 
 {
-	m_type 		= TURRET; //TODO, MAYBE NOT
+	m_type 		= NONE;
 
-	m_health 	= health;
-	m_damage 	= damage;
+	m_health 	= 0;
+	m_damage 	= 0;
+	m_radius 	= 0.0f;
 
 	m_pos		= pos;
-	m_radius 	= radius;
-
 	m_team 		= team;
-
 	m_env 		= env;
 }
 

@@ -14,7 +14,7 @@ private:
 	float 		m_speed;
 
 public: 
-	Unit(uint32_t health, uint32_t damage, float speed, const Vec2& pos, float radius, Faction team, Environment* env);
+	Unit(const Vec2& pos, float radius, Faction team, Environment* env);
 
 private:
 
