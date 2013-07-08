@@ -24,10 +24,11 @@ int Tank::move(float dt)
 int Tank::update(float dt)
 {
 	m_cooldown_actual++;
+	int ret = 0;
 
 	if(!on_cooldown())
 	{
-		int ret = Agent::update(dt);
+		ret = Agent::update(dt);
 	}
 
 	if( ret != 1)
