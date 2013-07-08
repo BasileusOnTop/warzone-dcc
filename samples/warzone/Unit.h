@@ -17,8 +17,8 @@ public:
 
 private:
 
-	int 			move();
-	virtual int		update();
+	int 			move(float dt);
+	virtual int		update(float dt);
 	
 };
 

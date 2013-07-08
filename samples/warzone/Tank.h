@@ -19,8 +19,8 @@ public:
 
 private:
 
-	int 				move();
-	int 				update();
+	int 				move(float dt);
+	int 				update(float dt);
 	bool				on_cooldown();
 	
 };

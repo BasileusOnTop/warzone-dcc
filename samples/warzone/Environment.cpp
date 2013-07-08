@@ -50,11 +50,11 @@ uint32_t Environment::agent_count()
 }
 
 //-----------------------------------------------------------------------------
-int Environment::update()
+int Environment::update(float dt)
 {
 	for(uint32_t i=0; i<m_agent_count; i++)
 	{
-		m_agents[i]->update();
+		m_agents[i]->update(dt);
 	}
 
 	return 0;

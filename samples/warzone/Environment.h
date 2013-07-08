@@ -31,6 +31,6 @@ public:
 
 	uint32_t	agent_count();
 
-	int 		update();
+	int 		update(float dt);
 	int 		add_agent(Agent* a);
 };

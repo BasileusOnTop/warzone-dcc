@@ -14,16 +14,16 @@ Unit::Unit(const Vec2& pos, Faction team, Environment* env)
 	m_type 		= UNIT;
 }
 
-int Unit::move()
+int Unit::move(float dt)
 {
 	m_dir = (Vec2(-350.0f, 150.0f) - m_pos).normalize();
-	m_pos += (m_dir * m_speed) * (1.0f/60.0f);
+	m_pos += (m_dir * m_speed) * (dt);
 }
 
-int Unit::update()
+int Unit::update(float dt)
 {
-	Agent::update();
-	move();
+	Agent::update(dt);
+	move(dt);
 
 	return 0;
 }

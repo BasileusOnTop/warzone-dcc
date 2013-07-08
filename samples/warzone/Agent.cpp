@@ -29,7 +29,7 @@ float Agent::area_of_effect()
 }
 
 
-int Agent::update()
+int Agent::update(float dt)
 {
 	if (is_dead())
 	{

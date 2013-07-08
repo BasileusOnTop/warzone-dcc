@@ -15,21 +15,21 @@ Tank::Tank(const Vec2& pos, Faction team, Environment* env)
 	m_cooldown_actual 	= 0;
 }
 
-int Tank::move()
+int Tank::move(float dt)
 {
 	m_dir = (Vec2(-350.0f, 150.0f) - m_pos).normalize();
-	m_pos += (m_dir * m_speed) * (1.0f/60.0f);
+	m_pos += (m_dir * m_speed) * (dt);
 }
 
-int Tank::update()
+int Tank::update(float dt)
 {
 	m_cooldown_actual++;
 
 	if(!on_cooldown())
 	{
-		Agent::update();
+		Agent::update(dt);
 	}
-	move();
+	move(dt);
 	
 
 	return 0;

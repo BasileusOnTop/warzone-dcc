@@ -33,7 +33,7 @@ private:
 public:
 	Agent(const Vec2& pos, Faction team, Environment* env);
 
-	virtual int 		update();
+	virtual int 		update(float dt);
 	virtual Type 		get_type();
 	Faction				get_faction();
 	int 				damage(uint32_t damage);
