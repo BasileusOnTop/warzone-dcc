@@ -9,6 +9,7 @@ class Agent;
 class Turret;
 class Unit;
 class Tank;
+class Hq;
 
 class RenderWorld
 {
@@ -27,7 +28,7 @@ public:
 
 private:
 
-	void			render_hq(Agent* agent);
+	void			render_hq(Hq* agent);
 	void			render_turret(Turret* agent);
 	void			render_unit(Unit* agent);
 	void			render_tank(Tank* agent);

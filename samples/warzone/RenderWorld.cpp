@@ -9,6 +9,7 @@
 #include "Unit.h"
 #include "Vec2.h"
 #include "Tank.h"
+#include "Hq.h"
 
 //-----------------------------------------------------------------------------
 RenderWorld::RenderWorld(Environment* env) :
@@ -65,7 +66,7 @@ void RenderWorld::render_agents()
 		{
 			case HQ:
 			{
-				render_hq(ith);
+				render_hq((Hq*)ith);
 				break;
 			}
 			case TURRET:
@@ -105,8 +106,15 @@ void RenderWorld::enable_debug(bool enable)
 }
 
 //-----------------------------------------------------------------------------
-void RenderWorld::render_hq(Agent* agent)
+void RenderWorld::render_hq(Hq* agent)
 {
+	DebugRenderer* dr = device()->debug_renderer();
+
+	const float& x = agent->m_pos.x;
+	const float& y = agent->m_pos.y;
+
+	dr->add_hexagon(Vec3(x, y - 20.0f, -1.0f), 40.0f, team_color(agent->get_faction()), true);
+	dr->add_hexagon(Vec3(x, y + 20.0f, -1.0f), 40.0f, team_color(agent->get_faction()), true);
 }
 
 //-----------------------------------------------------------------------------
