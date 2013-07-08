@@ -79,11 +79,7 @@ int Agent::scan()
 	return 0;
 }
 
-
 bool Agent::is_dead() const
 {
-	bool dead = (m_health <= 0);
-
-	Log::i("is_dead() says: %d", m_health);
-	return dead;
+	return m_health <= 0;
 }
