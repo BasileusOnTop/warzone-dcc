@@ -28,8 +28,8 @@ int Tank::update()
 	if(!on_cooldown())
 	{
 		Agent::update();
-		move();
 	}
+	move();
 	
 
 	return 0;
