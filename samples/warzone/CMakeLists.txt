@@ -7,6 +7,7 @@ set (SRC
 	Unit.cpp
 	Turret.cpp
 	Environment.cpp
+	Tank.cpp
 )
 
 set (HEADERS
@@ -15,6 +16,7 @@ set (HEADERS
 	Unit.h
 	Turret.h
 	Environment.h
+	Tank.h
 )
 
 add_definitions(-g -pg)
