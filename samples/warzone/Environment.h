@@ -6,7 +6,7 @@ class Agent;
 class Unit;
 class Turret;
 
-static const uint32_t AGENTS = 15;
+static const uint32_t AGENTS = 10;
 
 class Environment
 {

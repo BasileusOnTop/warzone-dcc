@@ -7,6 +7,7 @@
 #include "Agent.h"
 #include "Turret.h"
 #include "Unit.h"
+#include "Vec2.h"
 
 //-----------------------------------------------------------------------------
 RenderWorld::RenderWorld(Environment* env) :
@@ -52,11 +53,10 @@ void RenderWorld::render_agents()
 	{
 		Agent* ith = m_env->m_agents[i];
 
-		// FIXME FIXME FIXME
-		// if (ith->is_dead())
-		// {
-		// 	continue;
-		// }
+		if (ith->is_dead())
+		{
+			continue;
+		}
 
 		switch (ith->get_type())
 		{
@@ -106,18 +106,18 @@ void RenderWorld::render_turret(Turret* agent)
 {
 	DebugRenderer* dr = device()->debug_renderer();
 
-	const float& x = agent->m_coord_x;
-	const float& y = agent->m_coord_y;
+	const float& x = agent->m_pos.x;
+	const float& y = agent->m_pos.y;
 
 	// Base shape
-	dr->add_hexagon(Vec3(x, y, -1.0f), 25.0f, Color4::RED, true);
-	dr->add_hexagon(Vec3(x, y, -1.0f), 10.0f, Color4::RED, true);
+	dr->add_hexagon(Vec3(x, y, -1.0f), 25.0f, team_color(agent->get_faction()), true);
+	dr->add_hexagon(Vec3(x, y, -1.0f), 10.0f, team_color(agent->get_faction()), true);
 
 	// Gun shape
 	Vec2 gun_dir = agent->gun_dir();
 	gun_dir *= 50.0f;
 
-	dr->add_line(Vec3(x, y, -1.0f), Vec3(x, y, -1.0f) + Vec3(gun_dir.x, gun_dir.y, -1.0f), Color4::RED, true);
+	dr->add_line(Vec3(x, y, -1.0f), Vec3(x, y, -1.0f) + Vec3(gun_dir.x, gun_dir.y, -1.0f), team_color(agent->get_faction()), true);
 
 	if (m_debug)
 	{
@@ -130,13 +130,24 @@ void RenderWorld::render_unit(Unit* agent)
 {
 	DebugRenderer* dr = device()->debug_renderer();
 
-	const float& x = agent->m_coord_x;
-	const float& y = agent->m_coord_y;
+	const float& x = agent->m_pos.x;
+	const float& y = agent->m_pos.y;
 
-	dr->add_circle(Vec3(x, y, -1.0f), 16.0f, Color4::RED, true);
+	dr->add_circle(Vec3(x, y, -1.0f), 16.0f, team_color(agent->get_faction()), true);
 
 	if (m_debug)
 	{
 		dr->add_circle(Vec3(x, y, -1.0f), agent->area_of_effect(), Color4::GREEN, true);
+	}
+}
+
+//-----------------------------------------------------------------------------
+Color4 RenderWorld::team_color(Faction team)
+{
+	switch (team)
+	{
+		case RED: return Color4::RED; break;
+		case BLUE: return Color4::BLUE; break;
+		default: return Color4::YELLOW; break;
 	}
 }

@@ -31,8 +31,8 @@ void frame(float dt)
 		rw.enable_debug(!rw.debug());
 	}
 
-	rw.frame();
 	m.update();
+	rw.frame();
 }
 
 //-----------------------------------------------------------------------------

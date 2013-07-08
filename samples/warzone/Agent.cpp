@@ -1,95 +1,89 @@
 #include "Agent.h"
-
+#include "Log.h"
 #include <stdio.h>
 
+using namespace crown;
 
-	Agent::Agent(uint32_t health, uint32_t damage, float coord_x, float coord_y, float radius, Factions team, Environment* env) 
+Agent::Agent(uint32_t health, uint32_t damage, const Vec2& pos, float radius, Faction team, Environment* env) 
+{
+	m_type 		= TURRET; //TODO, MAYBE NOT
+
+	m_health 	= health;
+	m_damage 	= damage;
+
+	m_pos		= pos;
+	m_radius 	= radius;
+
+	m_team 		= team;
+
+	m_env 		= env;
+}
+
+int Agent::damage(uint32_t damage)
+{
+	m_health -= damage;
+	return 0;
+}
+
+float Agent::area_of_effect()
+{
+	return m_radius;
+}
+
+
+int Agent::update()
+{
+	if (is_dead())
 	{
-		m_killed 	= false;
-		m_type 		= TURRET; //TODO, MAYBE NOT
-
-		reset_scan();
-
-		m_health 	= health;
-		m_damage 	= damage;
-
-		m_coord_x 	= coord_x;
-		m_coord_y 	= coord_y;
-		m_radius 	= radius;
-
-		m_team 		= team;
-
-		m_env 		= env;
+		return -1;
 	}
 
-	int Agent::damage(uint32_t damage)
+	scan();
+
+	return 0;
+}
+
+Type Agent::get_type()
+{
+	return m_type;
+}
+
+Faction Agent::get_faction()
+{
+	return m_team;
+}
+
+int Agent::scan()
+{
+	for(uint32_t i=0; i<m_env->agent_count(); i++)
 	{
-		m_health -= damage;
+		Agent* ith = m_env->m_agents[i];
 
-		if (m_health <= 0)
-			destroy();
-
-		return 0;
-	}
-
-	float Agent::area_of_effect()
-	{
-		return m_radius;
-	}
-
-
-	int Agent::update()
-	{
-		scan();
-		attack();
-		reset_scan();
-
-		return 0;
-	}
-
-	Type Agent::get_type()
-	{
-		return m_type;
-	}
-
-	int Agent::reset_scan()
-	{
-		for( uint32_t i=0; i<AGENTS; i++)
-			m_agents_trace[i] = 0;
-
-		return 0;
-	}
-
-	int Agent::scan()
-	{
-		for(uint32_t i=0; i<AGENTS; i++)
+		// If it's me
+		if (ith == this)
 		{
-			// Euclidian norm
-			if( (m_coord_x - m_env->m_agents[i]->m_coord_x) * (m_coord_x - m_env->m_agents[i]->m_coord_x) +
-				(m_coord_y - m_env->m_agents[i]->m_coord_y) * (m_coord_y - m_env->m_agents[i]->m_coord_y) < m_radius * m_radius)
+			continue;
+		}
+
+		// Euclidian norm
+		if( (m_pos.x - ith->m_pos.x) * (m_pos.x - ith->m_pos.x) +
+			(m_pos.y - ith->m_pos.y) * (m_pos.y - ith->m_pos.y) <= m_radius * m_radius)
+		{
+			if((!ith->is_dead()) && (ith->m_team != m_team))
 			{
-				if(m_env->m_agents[i]->m_killed == false)
-					m_agents_trace[i] = 1;
+				ith->damage(m_damage);
+				Log::i("ciao");
 			}
 		}
-		return 0;
 	}
+	return 0;
+}
 
-	int Agent::attack()
-	{
-		for(uint32_t i=0; i<AGENTS; i++)
-		{
-			if( (m_agents_trace[i] == 1) && (m_env->m_agents[i]->m_team != m_team))
 
-					m_env->m_agents[i]->damage(m_damage);
-		}
+bool Agent::is_dead() const
+{
+	bool dead = (m_health <= 0);
 
-		return 0;
-	}
-
-	int Agent::destroy()
-	{
-		m_killed = true;
-
-		return 0;
-	}
+	Log::i("is_dead() says: %d", m_health);
+	return dead;
+}

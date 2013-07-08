@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Mat4.h"
+#include "Agent.h"
 using namespace crown;
 
 class Environment;
@@ -28,6 +29,8 @@ private:
 	void			render_hq(Agent* agent);
 	void			render_turret(Turret* agent);
 	void			render_unit(Unit* agent);
+
+	Color4			team_color(Faction team);
 
 private:
 
