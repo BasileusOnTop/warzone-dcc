@@ -31,7 +31,22 @@ void frame(float dt)
 		rw.enable_debug(!rw.debug());
 	}
 
-	m.update(dt);
+	static float scale = 1.0f;
+	if (keyb->key_pressed(KC_F1))
+	{
+		scale += 0.1f;
+	}
+	if (keyb->key_pressed(KC_F2))
+	{
+		scale -= 0.1f;
+	}
+
+	if (scale < 1.0f)
+	{
+		scale = 1.0f;
+	}
+
+	m.update(dt * scale);
 	rw.frame();
 }
 
