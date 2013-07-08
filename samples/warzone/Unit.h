@@ -18,7 +18,7 @@ public:
 private:
 
 	int 			move();
-	int 			update();
+	virtual int		update();
 	
 };
 
