@@ -22,8 +22,8 @@ int Unit::move(float dt)
 
 int Unit::update(float dt)
 {
-	Agent::update(dt);
-	move(dt);
+	if( Agent::update(dt) != 1)
+		move(dt);
 
 	return 0;
 }

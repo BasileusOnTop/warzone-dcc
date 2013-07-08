@@ -27,9 +27,11 @@ int Tank::update(float dt)
 
 	if(!on_cooldown())
 	{
-		Agent::update(dt);
+		int ret = Agent::update(dt);
 	}
-	move(dt);
+
+	if( ret != 1)
+		move(dt);
 	
 
 	return 0;

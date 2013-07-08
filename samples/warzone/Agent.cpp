@@ -36,9 +36,7 @@ int Agent::update(float dt)
 		return -1;
 	}
 
-	search_and_destroy();
-
-	return 0;
+	return search_and_destroy();
 }
 
 Type Agent::get_type()
@@ -70,6 +68,7 @@ int Agent::search_and_destroy()
 			if((!ith->is_dead()) && (ith->m_team != m_team))
 			{
 				ith->damage(m_damage);
+				return 1;
 			}
 		}
 	}
