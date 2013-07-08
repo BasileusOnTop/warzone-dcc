@@ -13,8 +13,6 @@ using namespace crown;
 Environment::Environment() :
 	m_agent_count(0)
 {
-	crown::Random random(crown::os::microseconds());
-
 	// Red team
 	m_spawn_points[0] = Vec2(-250.0f,  125.0f);
 	m_spawn_points[1] = Vec2(-200.0f,    0.0f);
@@ -30,20 +28,11 @@ Environment::Environment() :
 	add_agent(new Hq(Vec2( 400.0f, 0.0f), BLUE, 3000, this));
 
 	// Spawn turrets
-	add_agent(new Turret(Vec2(-350.0f,  150.0f), RED, 1000, this));
-	add_agent(new Turret(Vec2(-350.0f, -150.0f), RED, 1000, this));
+	add_agent(new Turret(Vec2(-325.0f,  150.0f), RED, 1000, this));
+	add_agent(new Turret(Vec2(-325.0f, -150.0f), RED, 1000, this));
 
-	add_agent(new Turret(Vec2(350.0f,  150.0f), BLUE, 1000, this));
-	add_agent(new Turret(Vec2(350.0f, -150.0f), BLUE, 1000, this));
-
-	// Spawn units
-	add_agent(new Unit(m_spawn_points[0], RED, 200, this));
-	add_agent(new Tank(m_spawn_points[1], RED, 200, this));
-	add_agent(new Unit(m_spawn_points[2], RED, 200, this));
-
-	add_agent(new Unit(m_spawn_points[3], BLUE, 200, this));
-	add_agent(new Tank(m_spawn_points[4], BLUE, 200, this));
-	add_agent(new Unit(m_spawn_points[5], BLUE, 200, this));
+	add_agent(new Turret(Vec2(325.0f,  150.0f), BLUE, 1000, this));
+	add_agent(new Turret(Vec2(325.0f, -150.0f), BLUE, 1000, this));
 }
 
 //-----------------------------------------------------------------------------
@@ -76,13 +65,84 @@ int Environment::add_agent(Agent* a)
 }
 
 //-----------------------------------------------------------------------------
+void Environment::spawn_red_units()
+{
+	crown::Random random(crown::os::microseconds());
+
+	// 0 or 1
+	uint32_t blue_seed = (random.integer() % 2) + 4;
+	Unit* red_a = new Unit(m_spawn_points[0], RED, 200, this);
+	      red_a->set_dir((m_agents[blue_seed]->m_pos - red_a->m_pos).normalize());
+
+	blue_seed = (random.integer() % 2) + 4;
+	Unit* red_b = new Tank(m_spawn_points[1], RED, 200, this);
+	      red_b->set_dir((m_agents[blue_seed]->m_pos - red_b->m_pos).normalize());
+
+	blue_seed = (random.integer() % 2) + 4;
+	Unit* red_c = new Unit(m_spawn_points[2], RED, 200, this);
+	      red_c->set_dir((m_agents[blue_seed]->m_pos - red_c->m_pos).normalize());
+
+	add_agent(red_a);
+	add_agent(red_b);
+	add_agent(red_c);
+}
+
+//-----------------------------------------------------------------------------
+void Environment::spawn_blue_units()
+{
+	crown::Random random(crown::os::microseconds());
+
+	uint32_t red_seed = (random.integer() % 2) + 2;
+	Unit* blue_a = new Unit(m_spawn_points[3], BLUE, 200, this);
+	      blue_a->set_dir((m_agents[red_seed]->m_pos - blue_a->m_pos).normalize());
+
+	red_seed = (random.integer() % 2) + 2;
+	Unit* blue_b = new Tank(m_spawn_points[4], BLUE, 200, this);
+	      blue_b->set_dir((m_agents[red_seed]->m_pos - blue_b->m_pos).normalize());
+
+	red_seed = (random.integer() % 2) + 2;
+	Unit* blue_c = new Unit(m_spawn_points[5], BLUE, 200, this);
+	      blue_c->set_dir((m_agents[red_seed]->m_pos - blue_c->m_pos).normalize());
+
+	add_agent(blue_a);
+	add_agent(blue_b);
+	add_agent(blue_c);
+}
+
+//-----------------------------------------------------------------------------
 void Environment::spawn_units()
 {
-	// add_agent(new Unit(m_spawn_points[0], RED, this));
-	// add_agent(new Tank(m_spawn_points[1], RED, this));
-	// add_agent(new Unit(m_spawn_points[2], RED, this));
+	crown::Random random(crown::os::microseconds());
 
-	add_agent(new Unit(m_spawn_points[3], BLUE, 300, this));
-	add_agent(new Tank(m_spawn_points[4], BLUE, 300, this));
-	add_agent(new Unit(m_spawn_points[5], BLUE, 300, this));	
+	// 0 or 1
+	uint32_t blue_seed = (random.integer() % 2) + 4;
+	Unit* red_a = new Unit(m_spawn_points[0], RED, 200, this);
+	      red_a->set_dir((m_agents[blue_seed]->m_pos - red_a->m_pos).normalize());
+
+	blue_seed = (random.integer() % 2) + 4;
+	Unit* red_b = new Tank(m_spawn_points[1], RED, 200, this);
+	      red_b->set_dir((m_agents[blue_seed]->m_pos - red_b->m_pos).normalize());
+
+	blue_seed = (random.integer() % 2) + 4;
+	Unit* red_c = new Unit(m_spawn_points[2], RED, 200, this);
+	      red_c->set_dir((m_agents[blue_seed]->m_pos - red_c->m_pos).normalize());
+
+	uint32_t red_seed = (random.integer() % 2) + 2;
+	Unit* blue_a = new Unit(m_spawn_points[3], BLUE, 200, this);
+	      blue_a->set_dir((m_agents[red_seed]->m_pos - blue_a->m_pos).normalize());
+
+	red_seed = (random.integer() % 2) + 2;
+	Unit* blue_b = new Tank(m_spawn_points[4], BLUE, 200, this);
+	      blue_b->set_dir((m_agents[red_seed]->m_pos - blue_b->m_pos).normalize());
+
+	red_seed = (random.integer() % 2) + 2;
+	Unit* blue_c = new Unit(m_spawn_points[5], BLUE, 200, this);
+	      blue_c->set_dir((m_agents[red_seed]->m_pos - blue_c->m_pos).normalize());
+
+	add_agent(red_a);
+	add_agent(red_b);
+	add_agent(red_c);
+	add_agent(blue_a);
+	add_agent(blue_b);
+	add_agent(blue_c);
 }

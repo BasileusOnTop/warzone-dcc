@@ -39,9 +39,10 @@ void RenderWorld::frame()
 	device()->renderer()->set_matrix(MT_VIEW, Mat4::IDENTITY);
 	device()->renderer()->set_clear_color(Color4::BLACK);
 
+	render_bounds();
+
 	// Render all the agents, dynamically selecting the shape of each
 	render_agents();
-	render_bounds();
 }
 
 //-----------------------------------------------------------------------------
@@ -168,6 +169,12 @@ void RenderWorld::render_tank(Tank* agent)
 	const float& y = agent->m_pos.y;
 
 	dr->add_rectangle(Vec3(x, y, -1.0f), 16.0f, team_color(agent->get_faction()), true);
+
+	// Gun shape
+	Vec2 gun_dir = agent->gun_dir();
+	gun_dir *= 30.0f;
+
+	dr->add_line(Vec3(x, y, -1.0f), Vec3(x, y, -1.0f) + Vec3(gun_dir.x, gun_dir.y, -1.0f), team_color(agent->get_faction()), true);
 
 	if (m_debug)
 	{

@@ -5,7 +5,7 @@
 Tank::Tank(const Vec2& pos, Faction team, int32_t health, Environment* env) 
 	:Unit(pos, team, health, env)
 {
-
+	m_gun_dir			= Vec2(1, 0);
 	m_health			= health;
 	m_damage			= 30;
 	m_radius			= 75.0f;
@@ -49,6 +49,7 @@ int Tank::update(float dt)
 			{
 				if((!ith->is_dead()) && (ith->get_faction() != m_team))
 				{
+					m_gun_dir = (ith->m_pos - m_pos).normalize();
 					ith->damage(m_damage);
 					m_cooldown = true;
 					break;
@@ -61,4 +62,9 @@ int Tank::update(float dt)
 	{
 		move(dt);
 	}
+}
+
+Vec2 Tank::gun_dir()
+{
+	return m_gun_dir;
 }

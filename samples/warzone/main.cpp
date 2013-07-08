@@ -25,9 +25,19 @@ void frame(float dt)
 		device()->stop();
 	}
 
-	if (keyb->key_pressed(KC_F4))
+	if (keyb->key_pressed(KC_F5))
 	{
 		m.spawn_units();
+	}
+
+	if (keyb->key_pressed(KC_F6))
+	{
+		m.spawn_red_units();
+	}
+
+	if (keyb->key_pressed(KC_F7))
+	{
+		m.spawn_blue_units();
 	}
 
 	// Debug mode on/off

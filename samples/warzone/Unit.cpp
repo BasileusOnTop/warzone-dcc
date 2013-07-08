@@ -6,7 +6,6 @@ Unit::Unit(const Vec2& pos, Faction team, int32_t health, Environment* env)
 	:Agent(pos, team, health, env)
 {
 	m_dir		= Vec2(0, 0);
-
 	m_health 	= health;
 	m_speed 	= 5.0f;
 	m_damage	= 10;
@@ -14,17 +13,13 @@ Unit::Unit(const Vec2& pos, Faction team, int32_t health, Environment* env)
 	m_type 		= UNIT;
 }
 
+void Unit::set_dir(const Vec2& dir)
+{
+	m_dir = dir;
+}
+
 int Unit::move(float dt)
 {
-	if (m_team == RED)
-	{
-		m_dir = Vec2(1, 0);
-	}
-	else
-	{
-		m_dir = Vec2(-1, 0);
-	}
-
 	m_pos += (m_dir * m_speed) * (dt);
 }
 

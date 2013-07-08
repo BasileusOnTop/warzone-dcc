@@ -10,7 +10,7 @@ class Unit;
 class Turret;
 class Tank;
 
-static const uint32_t AGENTS = 150;
+static const uint32_t AGENTS = 1500;
 static const uint32_t MAX_SPAWN_POINTS = 6;
 
 class Environment
@@ -35,4 +35,6 @@ public:
 	int 		add_agent(Agent* a);
 
 	void		spawn_units();
+	void		spawn_red_units();
+	void		spawn_blue_units();
 };
