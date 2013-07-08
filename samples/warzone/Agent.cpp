@@ -36,7 +36,7 @@ int Agent::update()
 		return -1;
 	}
 
-	scan();
+	search_and_destroy();
 
 	return 0;
 }
@@ -51,7 +51,7 @@ Faction Agent::get_faction()
 	return m_team;
 }
 
-int Agent::scan()
+int Agent::search_and_destroy()
 {
 	for(uint32_t i=0; i<m_env->agent_count(); i++)
 	{
@@ -70,7 +70,6 @@ int Agent::scan()
 			if((!ith->is_dead()) && (ith->m_team != m_team))
 			{
 				ith->damage(m_damage);
-				Log::i("ciao");
 			}
 		}
 	}
