@@ -23,6 +23,8 @@ int Tank::move()
 
 int Tank::update()
 {
+	m_cooldown_actual++;
+
 	if(!on_cooldown())
 	{
 		Agent::update();
@@ -35,7 +37,6 @@ int Tank::update()
 
 bool Tank::on_cooldown()
 {
-	m_cooldown_actual++;
 	if( m_cooldown_actual == m_cooldown)
 	{
 		return false;
