@@ -63,8 +63,6 @@ void RenderWorld::render_agents()
 			continue;
 		}
 
-		render_health(ith);
-
 		switch (ith->get_type())
 		{
 			case HQ:
@@ -93,6 +91,8 @@ void RenderWorld::render_agents()
 				break;
 			}
 		}
+
+		render_health(ith);
 	}
 }
 
@@ -116,8 +116,17 @@ void RenderWorld::render_hq(Hq* agent)
 	const float& x = agent->m_pos.x;
 	const float& y = agent->m_pos.y;
 
-	dr->add_hexagon(Vec3(x, y - 32.0f, -1.0f), 40.0f, team_color(agent->get_faction()), true);
-	dr->add_hexagon(Vec3(x, y + 32.0f, -1.0f), 40.0f, team_color(agent->get_faction()), true);
+	dr->add_hexagon(Vec3(x, y - 34.64f, -1.0f), 40.0f, team_color(agent->get_faction()), true);
+	dr->add_hexagon(Vec3(x, y + 34.64f, -1.0f), 40.0f, team_color(agent->get_faction()), true);
+
+	if (agent->get_faction() == RED)
+	{
+		dr->add_hexagon(Vec3(x - 60.0f, y, -1.0f), 40.0f, team_color(agent->get_faction()), true);	
+	}
+	else
+	{
+		dr->add_hexagon(Vec3(x + 60.0f, y, -1.0f), 40.0f, team_color(agent->get_faction()), true);	
+	}
 }
 
 //-----------------------------------------------------------------------------
