@@ -63,6 +63,8 @@ void frame(float dt)
 
 	m.update(dt * scale);
 	rw.frame();
+
+
 }
 
 //-----------------------------------------------------------------------------
@@ -93,3 +95,4 @@ int main(int argc, char** argv)
 
 	return 0;
 }
+

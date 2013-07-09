@@ -8,6 +8,10 @@ class Environment;
 
 class Unit : public Agent
 {
+
+private:
+	bool		m_final_stage;
+	
 protected:
 	float 		m_speed;
 	Vec2		m_dir;

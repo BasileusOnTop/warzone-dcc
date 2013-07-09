@@ -5,12 +5,14 @@
 Unit::Unit(const Vec2& pos, Faction team, int32_t health, Environment* env) 
 	:Agent(pos, team, health, env)
 {
-	m_dir		= Vec2(0, 0);
-	m_health 	= health;
-	m_speed 	= 5.0f;
-	m_damage	= 10;
-	m_radius	= 50.0f;
-	m_type 		= UNIT;
+	m_dir			= Vec2(0, 0);
+	m_health 		= health;
+	m_speed 		= 5.0f;
+	m_damage		= 10;
+	m_radius		= 50.0f;
+	m_type 			= UNIT;
+
+	m_final_stage 	= false;
 }
 
 void Unit::set_dir(const Vec2& dir)
@@ -20,6 +22,22 @@ void Unit::set_dir(const Vec2& dir)
 
 int Unit::move(float dt)
 {
+	if(!m_final_stage)
+	{
+		if(m_team == BLUE)
+			if(m_env->m_agents[2]->is_dead() || m_env->m_agents[3]->is_dead())
+			{
+				this->set_dir( (m_env->m_agents[0]->m_pos - m_pos).normalize());
+			}
+
+
+		if(m_team == RED)
+			if(m_env->m_agents[4]->is_dead() || m_env->m_agents[5]->is_dead())
+			{
+				this->set_dir( (m_env->m_agents[1]->m_pos - m_pos).normalize());
+			}
+	}
+
 	m_pos += (m_dir * m_speed) * (dt);
 }
 
