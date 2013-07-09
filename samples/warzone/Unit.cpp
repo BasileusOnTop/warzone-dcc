@@ -23,6 +23,17 @@ void Unit::set_dir(const Vec2& dir)
 int Unit::move(float dt)
 {
 	if(!m_final_stage)
+		for(uint32_t i=6; i<m_env->agent_count(); i++)
+		{
+			if( !m_env->m_agents[i]->is_dead() && m_env->m_agents[i]->get_faction() != m_team)
+			{
+				this->set_dir( (m_env->m_agents[i]->m_pos - m_pos).normalize());
+				break;
+			}
+		}
+
+
+	if(!m_final_stage)
 	{
 		if(m_team == BLUE)
 			if(m_env->m_agents[2]->is_dead() || m_env->m_agents[3]->is_dead())
