@@ -30,11 +30,13 @@ namespace crown
 {
 
 //-----------------------------------------------------------------------------
-Keyboard::Keyboard()
+Keyboard::Keyboard() :
+	m_current_frame(0)
 {
 	for (uint32_t i = 0; i < MAX_KEYCODES; i++)
 	{
-		m_keys[i] = false;
+		m_states[i] = false;
+		m_keys[i] = ~0;
 	}
 }
 
@@ -47,13 +49,13 @@ bool Keyboard::modifier_pressed(ModifierKey modifier) const
 //-----------------------------------------------------------------------------
 bool Keyboard::key_pressed(KeyCode key) const
 {
-	return m_keys[key] == true;
+	return m_states[key] == true && m_keys[key] == m_current_frame;
 }
 
 //-----------------------------------------------------------------------------
 bool Keyboard::key_released(KeyCode key) const
 {
-	return m_keys[key] == false;
+	return m_states[key] == false && m_keys[key] == m_current_frame;
 }
 
 } // namespace crown

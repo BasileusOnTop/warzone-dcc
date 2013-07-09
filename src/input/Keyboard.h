@@ -90,7 +90,9 @@ private:
 	uint8_t			m_modifier;
 
 	// True if key pressed, false otherwise.
-	bool			m_keys[MAX_KEYCODES];
+	uint64_t		m_current_frame;
+	bool			m_states[MAX_KEYCODES];
+	uint64_t		m_keys[MAX_KEYCODES];
 
 	friend class	InputManager;
 };

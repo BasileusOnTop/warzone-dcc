@@ -314,7 +314,7 @@ void Device::frame(void (*framegame)(float))
 	m_resource_manager->bring_loaded_online();
 
 	m_window->frame();
-	m_input_manager->frame();
+	m_input_manager->frame(frame_count());
 
 	m_renderer->begin_frame();
 

@@ -96,10 +96,11 @@ EventDispatcher* InputManager::get_event_dispatcher()
 }
 
 //-----------------------------------------------------------------------------
-void InputManager::frame()
+void InputManager::frame(uint64_t current_frame)
 {
 	OsEvent event;
 
+	m_keyboard.m_current_frame = current_frame;
 	while (1)
 	{
 		event = pop_event();
@@ -143,12 +144,14 @@ void InputManager::frame()
 
 				if (event.type == OSET_KEY_PRESS)
 				{
-					m_keyboard.m_keys[keyboard_event.key] = true;
+					m_keyboard.m_states[keyboard_event.key] = true;
+					m_keyboard.m_keys[keyboard_event.key] = current_frame;
 					m_event_dispatcher.key_pressed(keyboard_event);
 				}
 				else
 				{
-					m_keyboard.m_keys[keyboard_event.key] = false;
+					m_keyboard.m_states[keyboard_event.key] = false;
+					m_keyboard.m_keys[keyboard_event.key] = current_frame;
 					m_event_dispatcher.key_released(keyboard_event);
 				}
 
