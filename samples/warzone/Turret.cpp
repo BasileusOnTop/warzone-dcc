@@ -6,7 +6,7 @@ Turret::Turret(const Vec2& pos, Faction team, int32_t health, Environment* env)
 	:Agent(pos, team, health, env)
 {
 	m_health	= health;
-	m_damage	= 50;
+	m_damage	= 20;
 	m_radius	= 200.0f;
 	m_type 		= TURRET;
 	m_gun_dir	= Vec2(1, 0);

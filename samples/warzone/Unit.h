@@ -11,7 +11,8 @@ class Unit : public Agent
 
 private:
 	bool		m_final_stage;
-	
+	bool		m_turret_dir;
+
 protected:
 	float 		m_speed;
 	Vec2		m_dir;
