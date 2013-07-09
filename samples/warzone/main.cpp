@@ -20,28 +20,28 @@ void frame(float dt)
 	Keyboard* keyb = device()->keyboard();
 
 	// Exit game
-	if (keyb->key_pressed(KC_ESCAPE))
+	if (keyb->key_released(KC_ESCAPE))
 	{
 		device()->stop();
 	}
 
-	if (keyb->key_pressed(KC_F5))
+	if (keyb->key_released(KC_F5))
 	{
 		m.spawn_units();
 	}
 
-	if (keyb->key_pressed(KC_F6))
+	if (keyb->key_released(KC_F6))
 	{
 		m.spawn_red_units();
 	}
 
-	if (keyb->key_pressed(KC_F7))
+	if (keyb->key_released(KC_F7))
 	{
 		m.spawn_blue_units();
 	}
 
 	// Debug mode on/off
-	if (keyb->key_pressed(KC_d))
+	if (keyb->key_released(KC_d))
 	{
 		rw.enable_debug(!rw.debug());
 	}
@@ -49,11 +49,11 @@ void frame(float dt)
 	static float scale = 1.0f;
 	if (keyb->key_pressed(KC_F1))
 	{
-		scale += 0.1f;
+		scale += 0.3f;
 	}
 	if (keyb->key_pressed(KC_F2))
 	{
-		scale -= 0.1f;
+		scale -= 0.3f;
 	}
 
 	if (scale < 1.0f)
