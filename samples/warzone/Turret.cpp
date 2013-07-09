@@ -9,7 +9,7 @@ Turret::Turret(const Vec2& pos, Faction team, int32_t health, Environment* env)
 	m_damage	= 20;
 	m_radius	= 200.0f;
 	m_type 		= TURRET;
-	m_gun_dir	= Vec2(1, 0);
+	m_gun_dir	= (Vec2(0, 0) - m_pos).normalize();
 }
 
 //-----------------------------------------------------------------------------
