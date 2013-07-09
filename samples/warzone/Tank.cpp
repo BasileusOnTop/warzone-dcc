@@ -11,6 +11,7 @@ Tank::Tank(const Vec2& pos, Faction team, int32_t health, Environment* env)
 	m_radius			= 75.0f;
 	m_speed 			= 8.0f;
 	m_type 				= TANK;
+	m_cooldown			= false;
 }
 
 int Tank::update(float dt)
