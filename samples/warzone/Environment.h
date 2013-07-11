@@ -32,6 +32,7 @@ public:
 	uint32_t	agent_count();
 
 	int 		update(float dt);
+	void		update_physics(float dt);
 	int 		add_agent(Agent* a);
 
 	void		spawn_units();

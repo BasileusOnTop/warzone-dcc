@@ -6,6 +6,8 @@
 #include "Random.h"
 #include "OS.h"
 #include "Hq.h"
+#include "Circle.h"
+#include "Intersection.h"
 
 using namespace crown;
 
@@ -50,6 +52,57 @@ int Environment::update(float dt)
 	}
 
 	return 0;
+}
+
+void Environment::update_physics(float dt)
+{
+	for (uint32_t i = 6; i < m_agent_count; i++)
+	{
+		for (uint32_t j = 6; j < m_agent_count; j++)
+		{
+			Agent* agent_i = m_agents[i];
+			Agent* agent_j = m_agents[j];
+
+			if (i == j)
+			{
+				continue;
+			}
+
+			Circle circle_i;
+			Circle circle_j;
+
+			switch (agent_i->get_type())
+			{
+				case UNIT:
+				case TANK:
+				{
+					circle_i.set_center(agent_i->m_pos);
+					circle_i.set_radius(16.0f);
+					break;
+				}
+				default:
+					continue;
+			}
+
+			switch (agent_j->get_type())
+			{
+				case UNIT:
+				case TANK:
+				{
+					circle_j.set_center(agent_j->m_pos);
+					circle_j.set_radius(16.0f);
+					break;
+				}
+				default:
+					continue;
+			}
+			Vec2 penetration;
+			if (Intersection::test_circle_circle(circle_i, circle_j, penetration))
+			{
+				agent_i->m_pos += penetration;
+			}
+		}
+	}
 }
 
 //-----------------------------------------------------------------------------

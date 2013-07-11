@@ -62,9 +62,9 @@ void frame(float dt)
 	}
 
 	m.update(dt * scale);
+	m.update_physics(dt * scale);
+
 	rw.frame();
-
-
 }
 
 //-----------------------------------------------------------------------------
