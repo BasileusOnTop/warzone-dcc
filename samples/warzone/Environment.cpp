@@ -63,7 +63,7 @@ void Environment::update_physics(float dt)
 			Agent* agent_i = m_agents[i];
 			Agent* agent_j = m_agents[j];
 
-			if (i == j)
+			if (i == j || (agent_i->is_dead() || agent_j->is_dead()))
 			{
 				continue;
 			}
