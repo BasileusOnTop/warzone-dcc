@@ -85,10 +85,13 @@ int main(int argc, char** argv)
 		exit(-1);
 	}
 
+	uint32_t frames = 0;
+
 	// Main loop
 	while (engine->is_running())
 	{
 		engine->frame(frame);
+		Log::i("Frame: %i", ++frames);
 	}
 
 	engine->shutdown(shutdown);

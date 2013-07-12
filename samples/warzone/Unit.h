@@ -15,6 +15,8 @@ protected:
 	Vec2		m_force_dir;
 	bool		m_force_dir_f;
 
+	Vec2		m_last_pos;
+
 public: 
 					Unit(const Vec2& pos, Faction team, int32_t health, Environment* env);
 
@@ -24,6 +26,7 @@ protected:
 
 	virtual int 	move(float dt);
 	virtual int		update(float dt);
+	void 			set_pos(const float dt);
 	
 };
 

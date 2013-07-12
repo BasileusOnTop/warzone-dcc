@@ -26,6 +26,7 @@ Agent::Agent(const Vec2& pos, Faction team, int32_t health, Environment* env)
 int Agent::damage(uint32_t damage)
 {
 	m_health -= damage;
+	Log::i("Id: %p | damage: %i | cur_hp: %i", (void *) this, damage, m_health);
 	return 0;
 }
 
@@ -33,17 +34,6 @@ int Agent::damage(uint32_t damage)
 float Agent::area_of_effect()
 {
 	return m_radius;
-}
-
-//-----------------------------------------------------------------------------
-int Agent::update(float dt)
-{
-	if (is_dead())
-	{
-		return -1;
-	}
-
-	return search_and_destroy();
 }
 
 //-----------------------------------------------------------------------------
@@ -56,12 +46,6 @@ Type Agent::get_type()
 Faction Agent::get_faction()
 {
 	return m_team;
-}
-
-//-----------------------------------------------------------------------------
-int Agent::search_and_destroy()
-{
-
 }
 
 //-----------------------------------------------------------------------------

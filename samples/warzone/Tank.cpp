@@ -12,6 +12,7 @@ Tank::Tank(const Vec2& pos, Faction team, int32_t health, Environment* env)
 	m_speed 			= 8.0f;
 	m_type 				= TANK;
 	m_cooldown			= false;
+
 }
 
 int Tank::update(float dt)
@@ -51,6 +52,7 @@ int Tank::update(float dt)
 				if((!ith->is_dead()) && (ith->get_faction() != m_team))
 				{
 					m_gun_dir = (ith->m_pos - m_pos).normalize();
+					Log::i("Type: %i | Team: %i | Id: %p | Hit: %p", m_type, m_team, (void *) this, (void *) ith);
 					ith->damage(m_damage);
 					m_cooldown = true;
 					break;

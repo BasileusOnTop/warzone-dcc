@@ -32,9 +32,6 @@ public:
 
 	Vec2				m_pos;
 
-private:
-	int 				search_and_destroy();
-
 public:
 	Agent(const Vec2& pos, Faction team, int32_t health, Environment* env);
 

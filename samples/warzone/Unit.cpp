@@ -17,11 +17,24 @@ Unit::Unit(const Vec2& pos, Faction team, int32_t health, Environment* env)
 	m_damage		= 10;
 	m_radius		= 50.0f;
 	m_type 			= UNIT;
+
+	m_last_pos		= m_pos;
 }
 
 void Unit::set_dir(const Vec2& dir)
 {
 	m_dir = dir;
+}
+
+void Unit::set_pos(const float dt)
+{
+	m_pos += (m_dir * m_speed) * (dt);
+
+	if( m_pos != m_last_pos)
+	{
+		m_last_pos = m_pos;
+		Log::i("Type: %i | Team: %i | Id: %p | cur_pos: x:%f y:%f | cur_dir: x:%f y:%f", m_type, m_team, (void *) this, m_pos.x, m_pos.y, m_dir.x, m_dir.y);
+	}
 }
 
 int Unit::move(float dt)
@@ -34,7 +47,7 @@ int Unit::move(float dt)
 		if( !m_env->m_agents[i]->is_dead() && m_env->m_agents[i]->get_faction() != m_team)
 		{
 			this->set_dir( (m_env->m_agents[i]->m_pos - m_pos).normalize());
-			m_pos += (m_dir * m_speed) * (dt);
+			set_pos(dt);
 			return 0;
 		}
 	}
@@ -47,7 +60,7 @@ int Unit::move(float dt)
 			if(m_force_dir_f == true)
 			{
 				this->set_dir(m_force_dir);
-				m_pos += (m_dir * m_speed) * (dt);
+				set_pos(dt);
 				return 0;
 			}
 
@@ -63,14 +76,14 @@ int Unit::move(float dt)
 			if(!m_env->m_agents[2]->is_dead())
 			{
 				this->set_dir( (m_env->m_agents[2]->m_pos - m_pos).normalize());
-				m_pos += (m_dir * m_speed) * (dt);
+				set_pos(dt);
 				return 0;
 			}
 			
 			if(!m_env->m_agents[3]->is_dead())
 			{
 				this->set_dir( (m_env->m_agents[3]->m_pos - m_pos).normalize());
-				m_pos += (m_dir * m_speed) * (dt);
+				set_pos(dt);
 				return 0;
 			}
 
@@ -79,7 +92,7 @@ int Unit::move(float dt)
 		if( m_env->m_agents[2]->is_dead() && m_env->m_agents[3]->is_dead())
 		{
 			this->set_dir( (m_env->m_agents[0]->m_pos - m_pos).normalize());
-			m_pos += (m_dir * m_speed) * (dt);
+			set_pos(dt);
 			return 0;
 		}
 
@@ -92,7 +105,7 @@ int Unit::move(float dt)
 			if(m_force_dir_f == true)
 			{
 				this->set_dir(m_force_dir);
-				m_pos += (m_dir * m_speed) * (dt);
+				set_pos(dt);
 				return 0;
 			}
 
@@ -108,7 +121,7 @@ int Unit::move(float dt)
 			if(!m_env->m_agents[4]->is_dead())
 			{
 				this->set_dir( (m_env->m_agents[4]->m_pos - m_pos).normalize());
-				m_pos += (m_dir * m_speed) * (dt);
+				set_pos(dt);
 				return 0;
 
 			}
@@ -116,7 +129,7 @@ int Unit::move(float dt)
 			if(!m_env->m_agents[5]->is_dead())
 			{
 				this->set_dir( (m_env->m_agents[5]->m_pos - m_pos).normalize());
-				m_pos += (m_dir * m_speed) * (dt);
+				set_pos(dt);
 				return 0;
 
 			}
@@ -125,7 +138,7 @@ int Unit::move(float dt)
 		if( m_env->m_agents[4]->is_dead() && m_env->m_agents[5]->is_dead())
 		{
 			this->set_dir( (m_env->m_agents[1]->m_pos - m_pos).normalize());
-			m_pos += (m_dir * m_speed) * (dt);
+			set_pos(dt);
 			return 0;
 		}
 	}
@@ -171,6 +184,7 @@ int Unit::update(float dt)
 				if((!ith->is_dead()) && (ith->get_faction() != m_team))
 				{
 					ith->damage(m_damage);
+					Log::i("Type: %i | Team: %i | Id: %p | Hit: %p", m_type, m_team, (void *) this, (void *) ith);	
 					m_cooldown = true;
 					break;
 				}

@@ -57,6 +57,7 @@ int Turret::update(float dt)
 				{
 					m_gun_dir = (ith->m_pos - m_pos).normalize();
 					ith->damage(m_damage);
+					Log::i("Type: %i | Team: %i | Id: %p | Hit: %p", m_type, m_team, (void *) this, (void *) ith);
 					m_cooldown = true;
 					break;
 				}
