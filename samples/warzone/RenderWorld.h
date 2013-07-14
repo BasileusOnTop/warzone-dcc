@@ -10,6 +10,7 @@ class Turret;
 class Unit;
 class Tank;
 class Hq;
+class Medic;
 
 class RenderWorld
 {
@@ -32,6 +33,7 @@ private:
 	void			render_turret(Turret* agent);
 	void			render_unit(Unit* agent);
 	void			render_tank(Tank* agent);
+	void			render_medic(Medic* agent);
 	void			render_health(Agent* agent);
 	void			render_bounds();
 

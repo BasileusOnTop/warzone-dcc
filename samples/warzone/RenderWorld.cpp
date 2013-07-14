@@ -10,6 +10,7 @@
 #include "Vec2.h"
 #include "Tank.h"
 #include "Hq.h"
+#include "Medic.h"
 
 //-----------------------------------------------------------------------------
 RenderWorld::RenderWorld(Environment* env) :
@@ -83,6 +84,11 @@ void RenderWorld::render_agents()
 			case TANK:
 			{
 				render_tank((Tank*)ith);
+				break;
+			}
+			case MEDIC:
+			{
+				render_medic((Medic*)ith);
 				break;
 			}
 			// Never
@@ -190,6 +196,25 @@ void RenderWorld::render_tank(Tank* agent)
 		dr->add_circle(Vec3(x, y, -1.0f), agent->area_of_effect(), Color4::GREEN, true);
 	}
 }
+
+//-----------------------------------------------------------------------------
+void RenderWorld::render_medic(Medic* agent)
+{
+	DebugRenderer* dr = device()->debug_renderer();
+
+	const float& x = agent->m_pos.x;
+	const float& y = agent->m_pos.y;
+
+	dr->add_circle(Vec3(x, y, -1.0f), 16.0f, team_color(agent->get_faction()), true);
+	dr->add_line(Vec3(x - 5.0f, y, -1.0f), Vec3(x + 5.0f, y, -1.0f), team_color(agent-get_faction()), Color::LIMEGREEN, true);
+	dr->add_line(Vec3(x, y - 5.0f, -1.0f), Vec3(x, y + 5.0f, -1.0f), team_color(agent-get_faction()), Color::LIMEGREEN, true);
+
+	if (m_debug)
+	{
+		dr->add_circle(Vec3(x, y, -1.0f), agent->area_of_effect(), Color4::GREEN, true);
+	}
+}
+
 //-----------------------------------------------------------------------------
 void RenderWorld::render_bounds()
 {

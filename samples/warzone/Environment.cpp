@@ -58,7 +58,7 @@ void Environment::update_physics(float dt)
 {
 	for (uint32_t i = 6; i < m_agent_count; i++)
 	{
-		for (uint32_t j = 6; j < m_agent_count; j++)
+		for (uint32_t j = 2; j < m_agent_count; j++)
 		{
 			Agent* agent_i = m_agents[i];
 			Agent* agent_j = m_agents[j];
@@ -75,10 +75,17 @@ void Environment::update_physics(float dt)
 			{
 				case UNIT:
 				case TANK:
+				case MEDIC:
 				{
 					circle_i.set_center(agent_i->m_pos);
 					circle_i.set_radius(16.0f);
 					break;
+				}
+				case TURRET:
+				{
+					circle_i.set_center(agent_i->m_pos);
+					circle_i.set_radius(25.0f);
+					break;	
 				}
 				default:
 					continue;
@@ -88,14 +95,28 @@ void Environment::update_physics(float dt)
 			{
 				case UNIT:
 				case TANK:
+				case MEDIC:
 				{
 					circle_j.set_center(agent_j->m_pos);
 					circle_j.set_radius(16.0f);
 					break;
 				}
+				case TURRET:
+				{
+					circle_j.set_center(agent_j->m_pos);
+					circle_j.set_radius(25.0f);
+					break;	
+				}
 				default:
 					continue;
 			}
+
+			if ((agent_i->get_type() == TURRET && agent_j->get_type() != TURRET) ||
+					(agent_j->get_type() == TURRET && agent_i->get_type() != TURRET))
+			{
+
+			}
+
 			Vec2 penetration;
 			if (Intersection::test_circle_circle(circle_i, circle_j, penetration))
 			{
