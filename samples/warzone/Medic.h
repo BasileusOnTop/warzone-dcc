@@ -11,9 +11,7 @@ class Medic: public Agent
 
 protected:
 	float 		m_speed;
-	Vec2		m_dir;
-	Vec2		m_force_dir;
-	bool		m_force_dir_f;
+	Vec2		m_dir;;
 	uint32_t 	m_heal;
 
 	Vec2		m_last_pos;

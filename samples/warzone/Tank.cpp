@@ -34,8 +34,19 @@ int Tank::update(float dt)
 	}
 	if( m_cooldown == false)
 	{
+		uint32_t start_fetch = 0;
 
-		for(uint32_t i=0; i<m_env->agent_count(); i++)
+		if( m_team == BLUE && (!m_env->m_agents[2]->is_dead() || !m_env->m_agents[3]->is_dead()))
+		{
+			start_fetch = 2;
+		}
+
+		if( m_team == RED && (!m_env->m_agents[4]->is_dead() || !m_env->m_agents[5]->is_dead()))
+		{
+			start_fetch = 2;
+		}
+
+		for(uint32_t i=start_fetch; i<m_env->agent_count(); i++)
 		{
 			Agent* ith = m_env->m_agents[i];
 

@@ -190,29 +190,33 @@ void Environment::spawn_units()
 	crown::Random random(crown::os::microseconds());
 
 	// 0 or 1
-	//uint32_t blue_seed = (random.integer() % 2) + 4;
+
 	Unit* red_a = new Unit(m_spawn_points[0], RED, 200, this);
-	      //red_a->set_dir((m_agents[blue_seed]->m_pos - red_a->m_pos).normalize());
 
-	//blue_seed = (random.integer() % 2) + 4;
+
+
 	Unit* red_b = new Tank(m_spawn_points[1], RED, 200, this);
-	      //red_b->set_dir((m_agents[blue_seed]->m_pos - red_b->m_pos).normalize());
 
-	//blue_seed = (random.integer() % 2) + 4;
+
+
 	Unit* red_c = new Unit(m_spawn_points[2], RED, 200, this);
-	      //red_c->set_dir((m_agents[blue_seed]->m_pos - red_c->m_pos).normalize());
 
-	//uint32_t red_seed = (random.integer() % 2) + 2;
+
+
 	Unit* blue_a = new Unit(m_spawn_points[3], BLUE, 200, this);
-	      //blue_a->set_dir((m_agents[red_seed]->m_pos - blue_a->m_pos).normalize());
 
-	//red_seed = (random.integer() % 2) + 2;
+
+
 	Unit* blue_b = new Tank(m_spawn_points[4], BLUE, 200, this);
-	      //blue_b->set_dir((m_agents[red_seed]->m_pos - blue_b->m_pos).normalize());
 
-	//red_seed = (random.integer() % 2) + 2;
+
+
 	Unit* blue_c = new Unit(m_spawn_points[5], BLUE, 200, this);
-	      //blue_c->set_dir((m_agents[red_seed]->m_pos - blue_c->m_pos).normalize());
+
+	Medic* red_d  = new Medic(m_spawn_points[1], RED, 100, this);
+
+	Medic* blue_d = new Medic(m_spawn_points[4], BLUE, 100, this);
+
 
 	add_agent(red_a);
 	add_agent(red_b);
@@ -220,6 +224,9 @@ void Environment::spawn_units()
 	add_agent(blue_a);
 	add_agent(blue_b);
 	add_agent(blue_c);
+
+	add_agent(red_d);
+	add_agent(blue_d);
 }
 
 void Environment::spawn_blue_medic()
