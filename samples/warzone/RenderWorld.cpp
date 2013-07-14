@@ -206,8 +206,8 @@ void RenderWorld::render_medic(Medic* agent)
 	const float& y = agent->m_pos.y;
 
 	dr->add_circle(Vec3(x, y, -1.0f), 16.0f, team_color(agent->get_faction()), true);
-	dr->add_line(Vec3(x - 5.0f, y, -1.0f), Vec3(x + 5.0f, y, -1.0f), Color4::LIMEGREEN, true);
-	dr->add_line(Vec3(x, y - 5.0f, -1.0f), Vec3(x, y + 5.0f, -1.0f), Color4::LIMEGREEN, true);
+	dr->add_line(Vec3(x - 16.0f, y, -1.0f), Vec3(x + 16.0f, y, -1.0f), team_color(agent->get_faction()), true);
+	dr->add_line(Vec3(x, y - 16.0f, -1.0f), Vec3(x, y + 16.0f, -1.0f), team_color(agent->get_faction()), true);
 
 	if (m_debug)
 	{
