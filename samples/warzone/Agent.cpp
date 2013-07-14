@@ -31,6 +31,16 @@ int Agent::damage(uint32_t damage)
 }
 
 //-----------------------------------------------------------------------------
+int Agent::heal(uint32_t health)
+{
+	m_health += health;
+	if( m_health > m_initial_health)
+		m_health = m_initial_health;
+	Log::i("Id: %p | health: %i | cur_hp: %i", (void *) this, health, m_health);
+	return 0;
+}
+
+//-----------------------------------------------------------------------------
 float Agent::area_of_effect()
 {
 	return m_radius;

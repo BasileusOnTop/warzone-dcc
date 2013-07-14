@@ -3,6 +3,7 @@
 #include "Unit.h"
 #include "Turret.h"
 #include "Tank.h"
+#include "Medic.h"
 #include "Random.h"
 #include "OS.h"
 #include "Hq.h"
@@ -219,4 +220,22 @@ void Environment::spawn_units()
 	add_agent(blue_a);
 	add_agent(blue_b);
 	add_agent(blue_c);
+}
+
+void Environment::spawn_blue_medic()
+{
+
+	Medic* blue_m = new Medic(m_spawn_points[4], BLUE, 100, this);
+
+
+	add_agent(blue_m);
+}
+
+void Environment::spawn_red_medic()
+{
+
+	Medic* red_m = new Medic(m_spawn_points[1], RED, 100, this);
+
+
+	add_agent(red_m);
 }

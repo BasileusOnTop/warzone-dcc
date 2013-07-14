@@ -9,6 +9,7 @@ class Agent;
 class Unit;
 class Turret;
 class Tank;
+class Medic;
 
 static const uint32_t AGENTS = 1500;
 static const uint32_t MAX_SPAWN_POINTS = 6;
@@ -38,4 +39,7 @@ public:
 	void		spawn_units();
 	void		spawn_red_units();
 	void		spawn_blue_units();
+
+	void 		spawn_red_medic();
+	void 		spawn_blue_medic();
 };

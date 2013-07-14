@@ -40,6 +40,16 @@ void frame(float dt)
 		m.spawn_blue_units();
 	}
 
+	if (keyb->key_released(KC_F8))
+	{
+		m.spawn_red_medic();
+	}
+
+	if (keyb->key_released(KC_F9))
+	{
+		m.spawn_blue_medic();
+	}
+
 	// Debug mode on/off
 	if (keyb->key_released(KC_d))
 	{

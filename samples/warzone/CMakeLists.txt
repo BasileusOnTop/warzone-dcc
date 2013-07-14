@@ -9,6 +9,7 @@ set (SRC
 	Environment.cpp
 	Tank.cpp
 	Hq.cpp
+	Medic.cpp
 )
 
 set (HEADERS
@@ -19,6 +20,7 @@ set (HEADERS
 	Environment.h
 	Tank.h
 	Hq.h
+	Medic.h
 )
 
 add_definitions(-g -pg)
